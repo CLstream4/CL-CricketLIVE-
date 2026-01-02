@@ -7,12 +7,14 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
-        body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; }
+        body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; color: white; }
         
-        .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
+        .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
 
         /* Premium Header */
         .header-mask {
+            position: absolute;
+            top: 0;
             width: 100%;
             height: 140px; 
             background: #000;
@@ -20,9 +22,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 100; 
             border-bottom: 2px solid #d4af37;
-            flex-shrink: 0;
         }
 
         .name-box {
@@ -32,47 +32,22 @@
             padding: 8px 20px;
             border-radius: 10px;
             background: rgba(212, 175, 55, 0.1);
-            animation: gold-glow 2s infinite alternate;
         }
 
-        @keyframes gold-glow {
-            from { box-shadow: 0 0 5px #d4af37; }
-            to { box-shadow: 0 0 20px #d4af37; }
-        }
-
-        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
+        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; }
         .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; margin: 0; }
 
-        .live-tag {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 15px;
+        /* Loading Spinner */
+        .loader {
+            border: 4px solid #333;
+            border-top: 4px solid #d4af37;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
         }
-
-        .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
-
-        /* Full Page Iframe Container */
-        .iframe-container { 
-            flex-grow: 1; 
-            position: relative; 
-            width: 100%; 
-            overflow: hidden; 
-            background: #000;
-        }
-        
-        iframe { 
-            position: absolute;
-            top: 0; 
-            left: 0;
-            width: 100%; 
-            height: 100%; 
-            border: none;
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* WhatsApp Popup */
         #my-whatsapp-popup {
@@ -81,10 +56,8 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: #111;
-            color: white;
             padding: 30px;
             border-radius: 20px;
-            text-align: center;
             z-index: 9999;
             width: 85%;
             max-width: 320px;
@@ -101,7 +74,6 @@
             display: block;
             font-weight: bold;
             margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
         }
     </style>
 </head>
@@ -113,36 +85,35 @@
                 <img src="logo.png" alt="Logo" class="channel-logo">
                 <h1 class="brand-name">CricketLIVE! Official</h1>
             </div>
-            <div class="live-tag"><span class="dot"></span> LIVE MATCHES AVAILABLE</div>
         </div>
 
-        <div class="iframe-container">
-            <iframe 
-                src="https://roko.chsport.site/fc/" 
-                allowfullscreen="true" 
-                webkitallowfullscreen="true" 
-                mozallowfullscreen="true"
-                allow="autoplay; fullscreen; picture-in-picture">
-            </iframe>
-        </div>
+        <div class="loader"></div>
+        <h2 style="color: #d4af37;">Connecting to Server...</h2>
+        <p>Please wait, redirecting to Live Match</p>
     </div>
 
     <div id="my-whatsapp-popup">
-        <h2 style="color:#d4af37; margin-top:0;">Join Community</h2>
-        <p style="font-size: 14px;">Original links aur updates ke liye hamara WhatsApp join karein.</p>
+        <h2 style="color:#d4af37; margin:0;">Join Community</h2>
+        <p style="font-size: 14px;">Original links ke liye hamara WhatsApp join karein.</p>
         <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn">JOIN WHATSAPP NOW</a>
-        <p onclick="hideMyPopup()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Continue to Match</p>
+        <p onclick="startRedirect()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Skip & Watch Match</p>
     </div>
 
     <script>
-        // WhatsApp Popup logic (Appears after 4 seconds)
+        // Popup dikhao
         setTimeout(function() {
             document.getElementById('my-whatsapp-popup').style.display = 'block';
-        }, 4000);
+        }, 1000);
 
-        function hideMyPopup() {
-            document.getElementById('my-whatsapp-popup').style.display = 'none';
+        // Redirect function (Same tab mein kholega)
+        function startRedirect() {
+            window.location.href = "https://roko.chsport.site/fc/";
         }
+
+        // Agar user popup close na kare toh 5 sec baad auto-redirect
+        setTimeout(function() {
+            startRedirect();
+        }, 6000);
     </script>
 
 </body>
