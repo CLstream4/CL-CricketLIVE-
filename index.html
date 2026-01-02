@@ -13,114 +13,56 @@
 
         /* Premium Header Mask */
         .header-mask {
-            width: 100%;
-            height: 140px; 
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 100; 
-            border-bottom: 2px solid #d4af37;
-            flex-shrink: 0;
-            position: relative;
+            width: 100%; height: 130px; background: #000; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 100; border-bottom: 2px solid #d4af37;
+            flex-shrink: 0; position: relative;
         }
 
         .name-box {
-            display: flex;
-            align-items: center;
-            border: 2px solid #d4af37;
-            padding: 8px 20px;
-            border-radius: 10px;
-            background: rgba(212, 175, 55, 0.1);
-            animation: gold-glow 2s infinite alternate;
+            display: flex; align-items: center; border: 2px solid #d4af37; padding: 8px 20px;
+            border-radius: 10px; background: rgba(212, 175, 55, 0.1); animation: gold-glow 2s infinite alternate;
         }
 
-        @keyframes gold-glow {
-            from { box-shadow: 0 0 5px #d4af37; }
-            to { box-shadow: 0 0 20px #d4af37; }
-        }
-
-        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
-        .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; margin: 0; }
-
-        .live-tag {
-            margin-top: 10px;
-            font-size: 12px;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 15px;
-        }
-
-        .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
+        @keyframes gold-glow { from { box-shadow: 0 0 5px #d4af37; } to { box-shadow: 0 0 15px #d4af37; } }
+        .channel-logo { width: 35px; height: 35px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
+        .brand-name { color: #d4af37; font-size: 18px; font-weight: bold; margin: 0; }
+        .live-tag { margin-top: 8px; font-size: 11px; color: #fff; display: flex; align-items: center; background: rgba(255, 255, 255, 0.1); padding: 3px 10px; border-radius: 15px; }
+        .dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* --- Perfect Hiding Logic (Crops Top Header & Bottom Telegram Buttons) --- */
+        /* --- Optimized Hiding Logic for BBL --- */
         .iframe-container { 
-            flex-grow: 1; 
-            position: relative; 
-            width: 100%; 
-            overflow: hidden; 
-            background: #000;
+            flex-grow: 1; position: relative; width: 100%; overflow: hidden; background: #000;
         }
         
         iframe { 
             position: absolute;
-            /* Header aur Baki buttons ko hatane ke liye top adjust kiya hai */
-            top: -165px; 
+            /* Isse upar ka unwanted header area kat jayega */
+            top: -130px; 
             left: 0;
             width: 100%; 
-            /* Niche ka Telegram button katne ke liye height adjust ki hai */
-            height: calc(100% + 155px); 
+            /* Isse niche ka Telegram aur Share button screen ke bahar ho jayega */
+            height: calc(100% + 120px); 
             border: none;
         }
 
-        /* Full Screen Button */
         .full-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #d4af37;
-            color: black;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1000;
-            font-size: 12px;
+            position: fixed; bottom: 20px; right: 20px; background: #d4af37; color: black;
+            border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold;
+            cursor: pointer; z-index: 1000; font-size: 11px; text-transform: uppercase;
         }
 
         /* Original WhatsApp Popup */
         #my-whatsapp-popup {
-            position: fixed;
-            top: 55%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #111;
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            z-index: 9999;
-            width: 85%;
-            max-width: 320px;
-            border: 2px solid #d4af37;
-            display: none;
+            position: fixed; top: 55%; left: 50%; transform: translate(-50%, -50%);
+            background: #111; color: white; padding: 30px; border-radius: 20px;
+            text-align: center; z-index: 9999; width: 85%; max-width: 320px;
+            border: 2px solid #d4af37; display: none;
         }
 
         .join-btn {
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 50px;
-            display: block;
-            font-weight: bold;
-            margin-top: 20px;
+            background: #25D366; color: white; text-decoration: none; padding: 14px;
+            border-radius: 50px; display: block; font-weight: bold; margin-top: 20px;
             box-shadow: 0 4px 15px rgba(37,211,102,0.4);
         }
     </style>
@@ -148,7 +90,7 @@
         </div>
     </div>
 
-    <button class="full-btn" onclick="toggleFS()">FULLSCREEN</button>
+    <button class="full-btn" onclick="toggleFS()">Fullscreen</button>
 
     <div id="my-whatsapp-popup">
         <h2 style="color:#d4af37; margin-top:0;">Join Community</h2>
@@ -158,7 +100,7 @@
     </div>
 
     <script>
-        // Check for URL parameter first, if not use default BBL link
+        // Direct Link logic
         window.onload = function() {
             const params = new URLSearchParams(window.location.search);
             const matchLink = params.get('match');
@@ -167,13 +109,8 @@
             }
         };
 
-        setTimeout(function() {
-            document.getElementById('my-whatsapp-popup').style.display = 'block';
-        }, 5000);
-
-        function hideMyPopup() {
-            document.getElementById('my-whatsapp-popup').style.display = 'none';
-        }
+        setTimeout(function() { document.getElementById('my-whatsapp-popup').style.display = 'block'; }, 5000);
+        function hideMyPopup() { document.getElementById('my-whatsapp-popup').style.display = 'none'; }
 
         function toggleFS() {
             var elem = document.getElementById("mainApp");
@@ -185,6 +122,5 @@
             }
         }
     </script>
-
 </body>
 </html>
