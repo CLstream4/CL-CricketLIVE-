@@ -5,46 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CricketLIVE! Official</title>
     <style>
-        body { margin: 0; padding: 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #000; }
+        body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: sans-serif; }
         
-        /* Aapka Custom Header */
-        .my-header {
+        /* Iframe full screen rahega */
+        iframe { width: 100vw; height: 100vh; border: none; }
+
+        /* Yeh box CrickCast ko dhak dega */
+        .brand-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: linear-gradient(90deg, #1e293b, #0f172a);
-            color: #22d3ee; /* Cyan color for branding */
-            text-align: center;
-            padding: 15px 0;
-            font-size: 24px;
-            font-weight: bold;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            position: relative;
-            z-index: 100;
+            height: 120px; /* Is height ko aap kam-zyada kar sakte hain logo dhakne ke liye */
+            background: #0f172a; /* Same background color jo niche wali site ka hai */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
             border-bottom: 2px solid #22d3ee;
         }
 
-        /* Iframe ki setting taaki header ke niche dikhe */
-        iframe { 
-            width: 100vw; 
-            height: calc(100vh - 60px); /* Header ki height minus kar di */
-            border: none; 
+        .brand-name {
+            color: #22d3ee;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(34, 211, 238, 0.5);
         }
 
-        /* WhatsApp Popup */
-        #custom-popup {
+        /* WhatsApp Popup Design */
+        #whatsapp-popup {
             position: fixed;
-            top: 55%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(15, 23, 42, 0.98);
+            background: #1e293b;
             color: white;
-            padding: 25px;
-            border-radius: 15px;
+            padding: 30px;
+            border-radius: 20px;
             text-align: center;
             z-index: 9999;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             width: 85%;
             max-width: 320px;
-            border: 1px solid #25D366;
+            border: 2px solid #25D366;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
 
         .join-btn {
@@ -52,18 +57,18 @@
             color: white;
             text-decoration: none;
             padding: 12px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            margin-top: 15px;
+            border-radius: 10px;
+            display: block;
+            margin-top: 20px;
             font-weight: bold;
-            width: 80%;
+            font-size: 18px;
         }
 
         .close-btn {
-            margin-top: 15px;
             background: transparent;
+            color: #94a3b8;
             border: none;
-            color: #888;
+            margin-top: 15px;
             cursor: pointer;
             text-decoration: underline;
         }
@@ -71,25 +76,27 @@
 </head>
 <body>
 
-    <div class="my-header">
-        CricketLIVE! Official
+    <div class="brand-overlay">
+        <div class="brand-name">CricketLIVE! Official</div>
     </div>
 
-    <div id="custom-popup">
-        <h3 style="margin:0;">Join Community</h3>
-        <p style="font-size: 14px; color: #ccc;">Sare matches ke links ke liye join karein.</p>
-        <a href="APKA_WHATSAPP_LINK_YAHAN" target="_blank" class="join-btn">
-            Join WhatsApp
+    <div id="whatsapp-popup">
+        <div style="font-size: 40px; margin-bottom: 10px;">📢</div>
+        <h2 style="margin: 0;">Join Our Community</h2>
+        <p style="color: #cbd5e1;">Live match links aur updates ke liye niche click karein.</p>
+        
+        <a href="https://whatsapp.com/channel/APKA_LINK" target="_blank" class="join-btn">
+            JOIN WHATSAPP
         </a>
-        <br>
-        <button class="close-btn" onclick="closePopup()">Already Joined</button>
+        
+        <button class="close-btn" onclick="closeMe()">Already Joined</button>
     </div>
 
     <iframe src="https://crickcast-fancode.vercel.app/"></iframe>
 
     <script>
-        function closePopup() {
-            document.getElementById('custom-popup').style.display = 'none';
+        function closeMe() {
+            document.getElementById('whatsapp-popup').style.display = 'none';
         }
     </script>
 
