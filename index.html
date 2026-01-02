@@ -12,7 +12,7 @@
         
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* --- Header Section --- */
+        /* --- Updated Header (No Bottom Line) --- */
         .header-mask {
             width: 100%;
             height: 150px; 
@@ -22,44 +22,37 @@
             justify-content: center;
             align-items: center;
             z-index: 100; 
-            /* Bottom line also in gradient */
-            border-bottom: 2px solid transparent;
-            border-image: linear-gradient(90deg, #00f2ff, #bc00ff);
-            border-image-slice: 1;
+            border: none; /* Line removed */
         }
 
-        /* Name Box with Cyan-Purple Gradient Border */
+        /* Premium Gold & Silver Mix Box */
         .name-box {
             display: flex;
             align-items: center;
-            padding: 8px 15px;
-            border-radius: 10px;
-            background: rgba(0, 242, 255, 0.05);
+            padding: 8px 18px;
+            border-radius: 12px;
             position: relative;
             border: 2px solid transparent;
-            background-image: linear-gradient(#000, #000), linear-gradient(90deg, #00f2ff, #bc00ff);
+            /* Gold to Silver Gradient Border */
+            background-image: linear-gradient(#000, #000), 
+                              linear-gradient(135deg, #d4af37 0%, #ffffff 50%, #d4af37 100%);
             background-origin: border-box;
             background-clip: padding-box, border-box;
-            animation: glow-pulse 2s infinite alternate;
-            max-width: 90%;
-        }
-
-        @keyframes glow-pulse {
-            from { box-shadow: 0 0 5px rgba(0, 242, 255, 0.2); }
-            to { box-shadow: 0 0 20px rgba(188, 0, 255, 0.4); }
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            max-width: 92%;
         }
 
         .channel-logo { 
-            width: 35px; 
-            height: 35px; 
+            width: 32px; 
+            height: 32px; 
             margin-right: 12px; 
             border-radius: 50%; 
-            border: 1px solid #00f2ff;
+            border: 1.5px solid #fff;
         }
 
         .brand-name { 
             font-family: 'Orbitron', sans-serif;
-            font-size: 18px; 
+            font-size: 17px; 
             font-weight: 700; 
             margin: 0;
             white-space: nowrap;
@@ -76,12 +69,12 @@
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.05);
-            padding: 4px 15px;
+            padding: 4px 12px;
             border-radius: 15px;
-            border: 1px solid rgba(0, 242, 255, 0.3);
+            letter-spacing: 1px;
         }
 
-        .dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; margin-right: 8px; animation: blink 1s infinite; }
+        .dot { height: 6px; width: 6px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         /* --- Content Area --- */
@@ -95,16 +88,16 @@
             padding: 20px;
         }
 
-        /* Watch Button with Cyan-Purple Gradient */
+        /* Slightly Smaller Watch Button */
         .watch-button {
             background: linear-gradient(90deg, #00f2ff, #bc00ff);
             color: #fff;
             text-decoration: none;
-            padding: 18px 50px;
-            font-size: 22px;
+            padding: 14px 40px; /* Thoda size chhota kiya */
+            font-size: 19px; 
             font-weight: bold;
             border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 242, 255, 0.25);
             display: inline-block;
             transition: transform 0.3s;
             text-transform: uppercase;
@@ -113,27 +106,26 @@
 
         .watch-button:active { transform: scale(0.95); }
 
-        /* English Info Box with Gradient Border */
         .info-box-new {
-            margin-top: 30px;
+            margin-top: 25px;
             width: 85%;
             max-width: 360px;
             background: rgba(255, 255, 255, 0.02);
-            border: 1px dashed #bc00ff;
+            border: 1px dashed rgba(212, 175, 55, 0.5);
             border-radius: 12px;
             padding: 15px;
         }
 
         .info-box-new h3 {
-            color: #00f2ff;
-            font-size: 15px;
+            color: #d4af37;
+            font-size: 14px;
             margin: 0 0 5px 0;
             font-family: 'Orbitron', sans-serif;
         }
 
         .info-box-new p {
             color: #ccc;
-            font-size: 13px;
+            font-size: 12px;
             margin: 0;
             line-height: 1.5;
         }
@@ -151,7 +143,7 @@
             z-index: 9999;
             width: 80%;
             max-width: 300px;
-            border: 2px solid #bc00ff;
+            border: 2px solid #d4af37;
             display: none;
         }
 
@@ -193,7 +185,7 @@
 
         <div class="content-area">
             <a href="https://share.google/T98FJe93fB6BLzQgz" target="_self" class="watch-button">
-                🚀 WATCH LIVE NOW
+                 WATCH LIVE NOW
             </a>
 
             <div class="info-box-new">
