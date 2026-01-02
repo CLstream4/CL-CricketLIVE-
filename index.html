@@ -14,7 +14,7 @@
         /* Premium Header Mask */
         .header-mask {
             width: 100%;
-            height: 140px; /* Thoda height kam kiya taaki video space bade */
+            height: 140px; 
             background: #000;
             display: flex;
             flex-direction: column;
@@ -23,6 +23,7 @@
             z-index: 100; 
             border-bottom: 2px solid #d4af37;
             flex-shrink: 0;
+            position: relative;
         }
 
         .name-box {
@@ -57,19 +58,22 @@
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* --- Iframe Hiding Logic --- */
+        /* --- Perfect Hiding Logic --- */
         .iframe-container { 
             flex-grow: 1; 
             position: relative; 
             width: 100%; 
-            overflow: hidden; /* Bahar ka content chhupane ke liye */
+            overflow: hidden; 
+            background: #000;
         }
         
         iframe { 
+            position: absolute;
+            top: -75px; /* Isse CrickCast ka header poora upar nikal jayega */
+            left: 0;
             width: 100%; 
-            height: calc(100% + 60px); /* 60px extra height taaki niche se black na dikhe */
+            height: calc(100% + 75px); /* Height ko adjust kiya taaki niche gap na aaye */
             border: none;
-            margin-top: -55px; /* Isse CrickCast ka header upar chala jayega aur chhup jayega */
         }
         /* --------------------------- */
 
