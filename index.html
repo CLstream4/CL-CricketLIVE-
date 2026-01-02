@@ -7,17 +7,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
-        body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; }
+        body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; }
         
-        /* Iframe styling */
-        .iframe-container { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
-        iframe { width: 100%; height: 100%; border: none; }
+        /* Full Screen Fix Container */
+        .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
         /* Premium Header Mask */
         .header-mask {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 160px;
             background: #000;
@@ -25,8 +21,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 10; /* Z-index thoda kam kiya taaki full screen video iske upar aa sake */
             border-bottom: 2px solid #d4af37;
+            flex-shrink: 0;
         }
 
         .name-box {
@@ -44,7 +41,7 @@
             to { box-shadow: 0 0 20px #d4af37; }
         }
 
-        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; }
+        .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
         .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; margin: 0; }
 
         /* LIVE Indicator */
@@ -62,7 +59,17 @@
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* WHATSAPP POPUP - Aapka apna */
+        /* Iframe Container Fix */
+        .iframe-container { flex-grow: 1; position: relative; width: 100%; height: 100%; overflow: hidden; }
+        
+        /* IMPORTANT: Added Full Screen Permissions */
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none;
+        }
+
+        /* WhatsApp Popup */
         #my-whatsapp-popup {
             position: fixed;
             top: 55%;
@@ -73,10 +80,10 @@
             padding: 30px;
             border-radius: 20px;
             text-align: center;
-            z-index: 9999; /* Isko sabse upar rakha hai */
+            z-index: 9999;
             width: 85%;
             max-width: 320px;
-            border: 2px solid #25D366;
+            border: 2px solid #d4af37;
             display: none;
         }
 
@@ -89,17 +96,30 @@
             display: block;
             font-weight: bold;
             margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
         }
     </style>
 </head>
 <body>
 
-    <div class="header-mask">
-        <div class="name-box">
-            <img src="logo.png" alt="Logo" class="channel-logo">
-            <h1 class="brand-name">CricketLIVE! Official</h1>
+    <div class="main-wrapper">
+        <div class="header-mask">
+            <div class="name-box">
+                <img src="logo.png" alt="Logo" class="channel-logo">
+                <h1 class="brand-name">CricketLIVE! Official</h1>
+            </div>
+            <div class="live-tag"><span class="dot"></span> LIVE MATCHES AVAILABLE</div>
         </div>
-        <div class="live-tag"><span class="dot"></span> LIVE MATCHES AVAILABLE</div>
+
+        <div class="iframe-container">
+            <iframe 
+                src="https://crickcast-fancode.vercel.app/" 
+                allowfullscreen="true" 
+                webkitallowfullscreen="true" 
+                mozallowfullscreen="true"
+                allow="autoplay; fullscreen; picture-in-picture">
+            </iframe>
+        </div>
     </div>
 
     <div id="my-whatsapp-popup">
@@ -109,15 +129,10 @@
         <p onclick="hideMyPopup()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Continue to Match</p>
     </div>
 
-    <div class="iframe-container">
-        <iframe src="https://crickcast-fancode.vercel.app/"></iframe>
-    </div>
-
     <script>
-        // Website khulne ke 3 seconds baad aapka popup unke popup ke upar aa jayega
         setTimeout(function() {
             document.getElementById('my-whatsapp-popup').style.display = 'block';
-        }, 3000);
+        }, 5000);
 
         function hideMyPopup() {
             document.getElementById('my-whatsapp-popup').style.display = 'none';
