@@ -6,91 +6,124 @@
     <title>CricketLIVE! Official</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;700&family=Montserrat:ital,wght@1,500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;700&family=Montserrat:wght@600&display=swap');
 
         body { margin: 0; padding: 0; overflow: hidden; background: #000; font-family: 'Poppins', sans-serif; height: 100vh; width: 100vw; }
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* Header Section */
-        .header-mask { width: 100%; height: 140px; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100; }
-        .name-box { display: flex; align-items: center; padding: 10px 20px; border-radius: 12px; border: 2px solid transparent; background-image: linear-gradient(#000, #000), linear-gradient(135deg, #d4af37 0%, #ffffff 50%, #d4af37 100%); background-origin: border-box; background-clip: padding-box, border-box; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); max-width: 85%; }
-        .brand-name { font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 700; margin: 0; white-space: nowrap; background: linear-gradient(90deg, #00f2ff 0%, #bc00ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; }
+        /* --- Header Section --- */
+        .header-mask { width: 100%; height: 130px; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100; }
+        
+        .brand-name { 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px; /* Size bada kiya gaya */
+            font-weight: 700; 
+            margin: 0;
+            white-space: nowrap; 
+            background: linear-gradient(90deg, #00f2ff 0%, #bc00ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-        /* Content Area */
+        .live-tag {
+            margin-top: 10px;
+            font-size: 11px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 255, 136, 0.05);
+            padding: 4px 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            letter-spacing: 1px;
+        }
+
+        /* Chamakta Hua Green Dot */
+        .green-dot { height: 7px; width: 7px; background-color: #00ff88; border-radius: 50%; margin-right: 8px; animation: blink-green 1s infinite; box-shadow: 0 0 10px #00ff88; }
+        @keyframes blink-green { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } }
+
+        /* --- Content Area --- */
         .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+
+        /* Instruction Box Above Button */
+        .guide-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 11px;
+            padding: 5px 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .watch-button { background: linear-gradient(90deg, #00f2ff, #bc00ff); color: #fff; text-decoration: none; padding: 14px 40px; font-size: 18px; font-weight: bold; border-radius: 50px; box-shadow: 0 8px 25px rgba(0, 242, 255, 0.3); border: none; cursor: pointer; font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
 
         /* Info Box */
-        .info-box-new { margin-top: 25px; width: 88%; max-width: 380px; background: rgba(255, 255, 255, 0.03); padding: 15px; border-radius: 12px; border: 2px solid transparent; background-image: linear-gradient(#0b0b0b, #0b0b0b), linear-gradient(90deg, #00f2ff, #bc00ff); background-origin: border-box; background-clip: padding-box, border-box; }
+        .info-box-new { margin-top: 30px; width: 88%; max-width: 380px; background: rgba(255, 255, 255, 0.02); padding: 18px; border-radius: 12px; border: 2px solid transparent; background-image: linear-gradient(#0b0b0b, #0b0b0b), linear-gradient(90deg, #00f2ff, #bc00ff); background-origin: border-box; background-clip: padding-box, border-box; }
         .red-dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; display: inline-block; animation: pulse-red 1s infinite; margin-right: 8px; }
-        @keyframes pulse-red { 0%, 100% { transform: scale(0.9); opacity: 0.7; } 50% { transform: scale(1.2); opacity: 1; } }
+        @keyframes pulse-red { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.6; } }
 
         /* Popups Style */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 10000; }
-        .custom-popup { background: #111; padding: 25px; border-radius: 20px; text-align: center; width: 85%; max-width: 320px; border: 2px solid #bc00ff; box-shadow: 0 0 30px rgba(188, 0, 255, 0.2); }
-        .popup-title { font-family: 'Orbitron', sans-serif; color: #00f2ff; margin-bottom: 15px; font-size: 18px; }
-        .popup-text { font-size: 13px; color: #ccc; margin-bottom: 20px; line-height: 1.5; }
-        .btn-join { background: #25D366; color: #fff; text-decoration: none; padding: 12px; border-radius: 50px; display: block; font-weight: bold; margin-bottom: 10px; }
-        .btn-open { background: transparent; color: #00f2ff; border: 1px solid #00f2ff; padding: 10px; border-radius: 50px; display: block; font-weight: bold; cursor: pointer; width: 100%; font-family: 'Poppins'; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 10000; }
+        .custom-popup { background: #111; padding: 30px; border-radius: 20px; text-align: center; width: 85%; max-width: 320px; border: 2px solid #bc00ff; }
+        .popup-title { font-family: 'Orbitron', sans-serif; color: #fff; margin-bottom: 15px; font-size: 22px; letter-spacing: 2px; }
+        .popup-text { font-family: 'Poppins'; font-size: 13px; color: #00f2ff; margin-bottom: 20px; font-weight: 500; }
+        .btn-join { background: #25D366; color: #fff; text-decoration: none; padding: 12px; border-radius: 50px; display: block; font-weight: bold; margin-bottom: 15px; font-size: 14px; }
+        
+        .btn-continue { background: rgba(255,255,255,0.05); color: #888; border: 1px solid #333; padding: 8px 20px; border-radius: 50px; font-size: 11px; cursor: pointer; transition: 0.3s; }
+        .btn-continue:hover { color: #fff; border-color: #666; }
     </style>
 </head>
 <body>
 
     <div class="main-wrapper">
         <div class="header-mask">
-            <div class="name-box">
-                <img src="logo.png" alt="Logo" style="width:30px; margin-right:12px; border-radius:50%;">
-                <h1 class="brand-name">CricketLIVE! Official</h1>
+            <h1 class="brand-name">CricketLIVE! Official</h1>
+            <div class="live-tag">
+                <span class="green-dot"></span> SERVER ONLINE
             </div>
-            <div style="color:#fff; font-size:10px; margin-top:10px;"><span style="color:#ff0000;"></span> SERVER ONLINE</div>
         </div>
 
         <div class="content-area">
-            <button onclick="showLinkLocker()" class="watch-button"> WATCH LIVE NOW</button>
+            <div class="guide-box">Match dekhne ke liye "Watch Live Now" par click karein</div>
+            
+            <button onclick="showLinkLocker()" class="watch-button">🚀 WATCH LIVE NOW</button>
 
             <div class="info-box-new">
-                <div style="color:#00f2ff; font-weight:bold; font-size:14px; font-family:'Orbitron'; margin-bottom:5px;">
+                <div style="color:#00f2ff; font-weight:bold; font-size:14px; font-family:'Orbitron'; margin-bottom:8px;">
                     <span class="red-dot"></span> STAY UPDATED
                 </div>
-                <p style="color:#ccc; font-size:12px; margin:0;">Follow our channel for original HD links and fastest cricket updates.</p>
+                <p style="color:#ccc; font-size:12px; margin:0; line-height:1.6;">Get Real-time Cricket News, Live Match Links, and Fastest Updates. Follow our official channel now!</p>
             </div>
         </div>
     </div>
 
     <div id="link-locker" class="modal-overlay">
         <div class="custom-popup">
-            <div class="popup-title">Link Locked! </div>
-            <p class="popup-text">Match dekhne ke liye hamara WhatsApp channel join karna zaroori hai.</p>
+            <div class="popup-title">LOCKED 🔒</div>
+            <p style="color:#ccc; font-size:13px; margin-bottom:20px;">Join our channel to unlock the live match link.</p>
             <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="btn-join"><i class="fab fa-whatsapp"></i> JOIN CHANNEL</a>
-            <button onclick="openMatchLink()" class="btn-open">Already Joined (Open Link)</button>
+            <button onclick="openMatchLink()" style="background:none; border:1px solid #444; color:#00f2ff; padding:8px 20px; border-radius:50px; cursor:pointer; width:100%; font-size:12px;">Already Joined (Open Link)</button>
         </div>
     </div>
 
     <div id="welcome-popup" class="modal-overlay" style="display: flex;">
         <div class="custom-popup" style="border-color: #d4af37;">
-            <div class="popup-title" style="color:#d4af37;">Welcome!</div>
-            <p class="popup-text" style="color:#00f2ff; font-family:'Montserrat'; font-style:italic;">Join for original HD links and instant cricket notifications.</p>
-            <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="btn-join">JOIN WHATSAPP NOW</a>
-            <button onclick="hideWelcome()" style="background:none; border:none; color:#666; text-decoration:underline; font-size:11px; margin-top:10px; cursor:pointer;">Continue to Website</button>
+            <div class="popup-title" style="color:#d4af37;">WELCOME</div>
+            <p class="popup-text">Join for original HD links and instant cricket notifications.</p>
+            <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="btn-join"><i class="fab fa-whatsapp"></i> JOIN WHATSAPP NOW</a>
+            <button onclick="hideWelcome()" class="btn-continue">CONTINUE TO WEBSITE</button>
         </div>
     </div>
 
     <script>
-        // Website khulte hi aane wala popup hide karna
-        function hideWelcome() {
-            document.getElementById('welcome-popup').style.display = 'none';
-        }
-
-        // Watch Now click karne par locker dikhana
-        function showLinkLocker() {
-            document.getElementById('link-locker').style.display = 'flex';
-        }
-
-        // Final Match Link kholna
-        function openMatchLink() {
-            // Yahan apni match link daalein
-            window.location.href = "https://share.google/T98FJe93fB6BLzQgz";
-        }
+        function hideWelcome() { document.getElementById('welcome-popup').style.display = 'none'; }
+        function showLinkLocker() { document.getElementById('link-locker').style.display = 'flex'; }
+        function openMatchLink() { window.location.href = "https://share.google/T98FJe93fB6BLzQgz"; }
     </script>
 
 </body>
