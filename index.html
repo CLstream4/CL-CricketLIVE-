@@ -11,10 +11,10 @@
         
         .main-wrapper { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-        /* Premium Header Mask with Logo */
+        /* Premium Header Mask */
         .header-mask {
             width: 100%;
-            height: 130px; 
+            height: 140px; 
             background: #000;
             display: flex;
             flex-direction: column;
@@ -23,6 +23,7 @@
             z-index: 100; 
             border-bottom: 2px solid #d4af37;
             flex-shrink: 0;
+            position: relative;
         }
 
         .name-box {
@@ -32,82 +33,107 @@
             padding: 8px 20px;
             border-radius: 10px;
             background: rgba(212, 175, 55, 0.1);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            animation: gold-glow 2s infinite alternate;
         }
 
-        /* Logo Wapis Add Kiya */
+        @keyframes gold-glow {
+            from { box-shadow: 0 0 5px #d4af37; }
+            to { box-shadow: 0 0 20px #d4af37; }
+        }
+
         .channel-logo { width: 40px; height: 40px; margin-right: 12px; border-radius: 50%; border: 1px solid #d4af37; object-fit: cover; }
         .brand-name { color: #d4af37; font-size: 20px; font-weight: bold; margin: 0; }
 
         .live-tag {
             margin-top: 10px;
-            font-size: 11px;
+            font-size: 12px;
             color: #fff;
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.1);
             padding: 4px 12px;
             border-radius: 15px;
-            letter-spacing: 1px;
         }
 
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; margin-right: 6px; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* --- Improved Hiding Logic (Telegram Button Chhupane ke liye) --- */
+        /* --- Perfect Hiding Logic (Crops Top Header & Bottom Telegram Buttons) --- */
         .iframe-container { 
             flex-grow: 1; 
             position: relative; 
             width: 100%; 
-            overflow: hidden; /* Ye zaruri hai niche ka button kaatne ke liye */
+            overflow: hidden; 
             background: #000;
         }
         
         iframe { 
             position: absolute;
-            /* Header Chhupane ke liye (Isko adjust karein) */
-            top: -160px; 
+            /* Isse CrickCast ka header aur Language selection gayab hoga */
+            top: -165px; 
             left: 0;
             width: 100%; 
-            /* Niche ka button chhupane ke liye height ko 100% se thoda kam rakha hai */
-            height: calc(100% + 150px); 
+            /* Height ko aise adjust kiya hai taaki niche ka share/telegram button cut jaye */
+            height: calc(100% + 155px); 
             border: none;
         }
 
         /* Full Screen Button */
-        .fs-btn {
+        .full-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background: #d4af37;
             color: black;
             border: none;
-            padding: 10px 15px;
-            border-radius: 50px;
+            padding: 8px 15px;
+            border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
             z-index: 1000;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            font-size: 12px;
         }
 
+        /* Original WhatsApp Popup */
         #my-whatsapp-popup {
             position: fixed;
-            top: 55%; left: 50%; transform: translate(-50%, -50%);
-            background: #111; color: white; padding: 30px; border-radius: 20px;
-            text-align: center; z-index: 9999; width: 85%; max-width: 320px;
-            border: 2px solid #d4af37; display: none;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #111;
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 9999;
+            width: 85%;
+            max-width: 320px;
+            border: 2px solid #d4af37;
+            display: none;
+        }
+
+        .join-btn {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 14px;
+            border-radius: 50px;
+            display: block;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
         }
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper" id="fullApp">
+    <div class="main-wrapper" id="mainApp">
         <div class="header-mask">
             <div class="name-box">
                 <img src="logo.png" alt="Logo" class="channel-logo">
                 <h1 class="brand-name">CricketLIVE! Official</h1>
             </div>
-            <div class="live-tag"><span class="dot"></span> LIVE MATCHES</div>
+            <div class="live-tag"><span class="dot"></span> LIVE MATCHES AVAILABLE</div>
         </div>
 
         <div class="iframe-container">
@@ -116,28 +142,39 @@
                 allowfullscreen="true" 
                 webkitallowfullscreen="true" 
                 mozallowfullscreen="true"
-                allow="autoplay; fullscreen;">
+                allow="autoplay; fullscreen; picture-in-picture">
             </iframe>
         </div>
     </div>
 
-    <button class="fs-btn" onclick="openFull()">FULL SCREEN</button>
+    <button class="full-btn" onclick="toggleFS()">FULLSCREEN</button>
 
     <div id="my-whatsapp-popup">
         <h2 style="color:#d4af37; margin-top:0;">Join Community</h2>
-        <p style="font-size: 14px;">Updates ke liye WhatsApp join karein.</p>
-        <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" style="background:#25D366; color:white; text-decoration:none; padding:12px; display:block; border-radius:50px; font-weight:bold;">JOIN NOW</a>
-        <p onclick="hideMyPopup()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Continue</p>
+        <p style="font-size: 14px;">Original links aur updates ke liye hamara WhatsApp join karein.</p>
+        <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn">JOIN WHATSAPP NOW</a>
+        <p onclick="hideMyPopup()" style="font-size:12px; color:#888; cursor:pointer; margin-top:15px; text-decoration:underline;">Continue to Match</p>
     </div>
 
     <script>
-        setTimeout(() => { document.getElementById('my-whatsapp-popup').style.display = 'block'; }, 5000);
-        function hideMyPopup() { document.getElementById('my-whatsapp-popup').style.display = 'none'; }
+        // Popup logic
+        setTimeout(function() {
+            document.getElementById('my-whatsapp-popup').style.display = 'block';
+        }, 5000);
 
-        function openFull() {
-            let el = document.getElementById('fullApp');
-            if (el.requestFullscreen) el.requestFullscreen();
-            else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+        function hideMyPopup() {
+            document.getElementById('my-whatsapp-popup').style.display = 'none';
+        }
+
+        // Fullscreen logic
+        function toggleFS() {
+            var elem = document.getElementById("mainApp");
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) { elem.requestFullscreen(); }
+                else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
+            } else {
+                if (document.exitFullscreen) { document.exitFullscreen(); }
+            }
         }
     </script>
 
