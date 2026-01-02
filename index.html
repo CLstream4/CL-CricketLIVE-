@@ -1,13 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="hi">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MK Live Streaming</title>
     <style>
-        body { margin: 0; padding: 0; overflow: hidden; }
+        body { margin: 0; padding: 0; overflow: hidden; font-family: Arial, sans-serif; }
         iframe { width: 100vw; height: 100vh; border: none; }
+
+        /* Custom Popup Styling */
+        #custom-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15, 23, 42, 0.95);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            z-index: 9999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 80%;
+            max-width: 350px;
+        }
+
+        .join-btn {
+            background: #25D366; /* WhatsApp Green */
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            margin-top: 15px;
+            background: transparent;
+            border: 1px solid #555;
+            color: #ccc;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
+
+    <div id="custom-popup">
+        <h3>Join Our Community</h3>
+        <p>Get instant match links and updates on WhatsApp.</p>
+        <a href="https://whatsapp.com/channel/APKA_LINK_YAHAN" target="_blank" class="join-btn">
+            Join WhatsApp Channel
+        </a>
+        <button class="close-btn" onclick="closePopup()">Already Joined</button>
+    </div>
+
     <iframe src="https://crickcast-fancode.vercel.app/"></iframe>
+
+    <script>
+        function closePopup() {
+            document.getElementById('custom-popup').style.display = 'none';
+        }
+    </script>
+
 </body>
 </html>
