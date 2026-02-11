@@ -123,8 +123,8 @@
     <button class="channel-button fox501-btn" onclick="loadMatch('fox_501')">FOX 501 LIVE</button>
     <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_1')">CRICBUZZ 1</button>
     <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_2')">CRICBUZZ 2</button>
-    <button class="channel-button wpl-btn" onclick="loadMatch('wpl_live')">T20 WORLD CUP LIVE</button>
-    <button class="channel-button hotstar-btn" onclick="loadMatch('hotstar_live')">HOTSTAR LIVE</button>
+    <button class="channel-button wpl-btn" onclick="loadMatch('wpl_live')">Willow Cricbuzz</button>
+    <button class="channel-button hotstar-btn" onclick="loadMatch('hotstar_live')">Star Sports 1 HD Hindi</button>
     <button class="channel-button fox-btn" onclick="loadMatch('fox_cricket')">FOX CRICKET</button>
     <button class="channel-button criclife-btn" onclick="loadMatch('criclife')">CRICLIFE</button>
     <button class="channel-button special-btn" onclick="loadMatch('prime_live')">PRIME LIVE</button>
@@ -134,6 +134,8 @@
     <button class="channel-button" onclick="loadMatch('ss2hd')">SS 2 HD</button>
     <button class="channel-button" style="background: linear-gradient(45deg, #1f4068, #1b1b2f); border: 1px solid #00d2ff;" onclick="loadMatch('ss2hd_hindi')">STAR SPORTS 2 HD HINDI</button>
     <button class="channel-button" style="grid-column: span 1;" onclick="loadMatch('willow')">WILLOW SPORTS</button>
+    <button class="channel-button" style="background: linear-gradient(45deg, #d32f2f, #7b1fa2);" onclick="loadMatch('ss1_tamil')">Star Sports 1 HD Tamil</button>
+    <button class="channel-button" style="background: linear-gradient(45deg, #1976d2, #388e3c);" onclick="loadMatch('ss1_telugu')">Star Sports 1 HD Telugu</button>
 </div>
 
 <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 15px auto; width: 94%;">
@@ -152,17 +154,19 @@
         'fox_501': 'https://teamroiframe07.pages.dev/',
         'cricbuzz_1': 'https://paste.fledding.com/~Willo.html',
         'cricbuzz_2': 'https://teamrocricbuzz2.pages.dev/',
-        'hotstar_live': 'https://allinonereborn.xyz/airteltv-web/player.html?url=https%3A%2F%2Fallinonereborn.xyz%2Fairteltv-web%2Flive3.php%3Fid%3D689568',
+        'hotstar_live': 'https://allinonereborntg.github.io/jtv-plus/player.html?id=174',
         'fox_cricket': 'https://match-central.pages.dev/?id=fox',
-        'wpl_live': 'https://teamrohittry2.pages.dev/',
+        'wpl_live': 'https://allinonereborn.xyz/mpd/willo.html',
         'criclife': 'https://run-machine.pages.dev/?id=willow',
         'prime_live': 'https://allinonereborn.xyz/mpd/prime-hindi.html',
-        'prime_event': 'https://allinonereborn.xyz/mpd/prime2.html',
-        'hub_sports': 'https://allinonereborn.xyz/mpd/hub-sports.html',
+        'prime_event': 'https://allinonereborn.xyz/mpd/prime-eng.html',
+        'hub_sports': 'https://allinonereborn.xyz/mpd/hub_sprts.html',
         'ss2sd': 'https://insiderlivehd.pages.dev/English',
         'ss2hd': 'https://insiderlivehd.pages.dev/Fox',
         'ss2hd_hindi': 'https://teamroiframe11.pages.dev/',
-        'willow': 'https://paste.fledding.com/~Willow.html'
+        'willow': 'https://paste.fledding.com/~Willow.html',
+        'ss1_tamil': 'https://allinonereborntg.github.io/jtv-plus/player.html?id=4468',
+        'ss1_telugu': 'https://allinonereborntg.github.io/jtv-plus/player.html?id=4471'
     };
 
     let currentChannel = null;
@@ -174,8 +178,7 @@
         document.getElementById('loading-skeleton').style.display = 'block';
         
         let cropClass = '';
-        // Normal (No Zoom) Channels as requested
-        if (['hub_sports', 'prime_event', 'hotstar_live', 'willow', 'cricbuzz_1', 'cricbuzz_2', 'ss2sd'].includes(slug)) {
+        if (['hub_sports', 'prime_event', 'hotstar_live', 'willow', 'cricbuzz_1', 'cricbuzz_2', 'ss2sd', 'ss1_tamil', 'ss1_telugu', 'wpl_live'].includes(slug)) {
             cropClass = 'class="fixed-controls"';
         } 
         else if (slug === 'fox_cricket') {
