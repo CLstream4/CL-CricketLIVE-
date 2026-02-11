@@ -128,7 +128,10 @@
     <button class="channel-button fox-btn" onclick="loadMatch('fox_cricket')">FOX CRICKET</button>
     <button class="channel-button criclife-btn" onclick="loadMatch('criclife')">CRICLIFE</button>
     <button class="channel-button special-btn" onclick="loadMatch('prime_live')">PRIME LIVE</button>
-    <button class="channel-button" style="background: linear-gradient(45deg, #000, #333); border: 1px solid #00d2ff;" onclick="loadMatch('prime_event')">PRIME EVENT</button>
+
+    <button class="channel-button" style="background: linear-gradient(45deg, #1a1a1a, #000); border: 1px solid #00d2ff;" onclick="loadMatch('sky_nz_4k')">Sky Sports NZ 4k</button>
+
+    <button class="channel-button" style="background: linear-gradient(45deg, #00, #333); border: 1px solid #00d2ff;" onclick="loadMatch('prime_event')">PRIME EVENT</button>
     <button class="channel-button" style="background: linear-gradient(45deg, #8b0000, #ff0000); border: 1px solid #fff;" onclick="loadMatch('hub_sports')">HUB SPORTS</button>
     <button class="channel-button" onclick="loadMatch('ss2sd')">SS 2 SD</button>
     <button class="channel-button" onclick="loadMatch('ss2hd')">SS 2 HD</button>
@@ -159,6 +162,7 @@
         'wpl_live': 'https://allinonereborn.xyz/mpd/willo.html',
         'criclife': 'https://run-machine.pages.dev/?id=willow',
         'prime_live': 'https://allinonereborn.xyz/mpd/prime-hindi.html',
+        'sky_nz_4k': 'https://allinonereborn.xyz/mpd/nz1.html',
         'prime_event': 'https://allinonereborn.xyz/mpd/prime-eng.html',
         'hub_sports': 'https://allinonereborn.xyz/mpd/hub_sprts.html',
         'ss2sd': 'https://insiderlivehd.pages.dev/English',
@@ -178,7 +182,7 @@
         document.getElementById('loading-skeleton').style.display = 'block';
         
         let cropClass = '';
-        if (['hub_sports', 'prime_event', 'hotstar_live', 'willow', 'cricbuzz_1', 'cricbuzz_2', 'ss2sd', 'ss1_tamil', 'ss1_telugu', 'wpl_live'].includes(slug)) {
+        if (['hub_sports', 'prime_event', 'hotstar_live', 'willow', 'cricbuzz_1', 'cricbuzz_2', 'ss2sd', 'ss1_tamil', 'ss1_telugu', 'wpl_live', 'sky_nz_4k'].includes(slug)) {
             cropClass = 'class="fixed-controls"';
         } 
         else if (slug === 'fox_cricket') {
