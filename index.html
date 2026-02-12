@@ -161,9 +161,9 @@
         'fox_cricket': 'https://match-central.pages.dev/?id=fox',
         'wpl_live': 'https://allinonereborn.xyz/mpd/willo.html',
         'criclife': 'https://run-machine.pages.dev/?id=willow',
-        'prime_live': 'https://allinonereborn.xyz/mpd/prime-hindi.html',
+        'prime_live': 'https://paste.fledding.com/~Hin.html',
         'sky_nz_4k': 'https://allinonereborn.xyz/mpd/nz1.html',
-        'prime_event': 'https://allinonereborn.xyz/mpd/prime-eng.html',
+        'prime_event': 'https://paste.fledding.com/~Prime.html',
         'hub_sports': 'https://allinonereborn.xyz/mpd/hub_sprts.html',
         'ss2sd': 'https://insiderlivehd.pages.dev/English',
         'ss2hd': 'https://insiderlivehd.pages.dev/Fox',
@@ -182,7 +182,7 @@
         document.getElementById('loading-skeleton').style.display = 'block';
         
         let cropClass = '';
-        if (['hub_sports', 'prime_event', 'hotstar_live', 'willow', 'cricbuzz_1', 'cricbuzz_2', 'ss2sd', 'ss1_tamil', 'ss1_telugu', 'wpl_live', 'sky_nz_4k'].includes(slug)) {
+        if (['hub_sports', 'prime_event', 'hotstar_live', 'willow', 'cricbuzz_1', 'cricbuzz_2', 'ss2sd', 'ss1_tamil', 'ss1_telugu', 'wpl_live', 'sky_nz_4k', 'prime_live'].includes(slug)) {
             cropClass = 'class="fixed-controls"';
         } 
         else if (slug === 'fox_cricket') {
@@ -190,9 +190,6 @@
         } 
         else if (slug === 'criclife') {
             cropClass = 'class="criclife-crop"';
-        } 
-        else if (slug === 'prime_live') {
-            cropClass = 'class="prime-zoom-hindi"';
         } 
         else if (slug === 'ss2hd' || slug === 'ss2hd_hindi') {
             cropClass = 'class="ss2-custom-crop"';
