@@ -120,6 +120,7 @@
 <a href="/" id="view-all-btn">Show All Channels</a>
 
 <div class="channel-grid" id="main-grid">
+    <button class="channel-button hotstar-btn" onclick="loadMatch('jio_hotstar')">JIO HOTSTAR</button>
     <button class="channel-button fox501-btn" onclick="loadMatch('fox_501')">FOX 501 LIVE</button>
     <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_1')">CRICBUZZ 1</button>
     <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_2')">CRICBUZZ 2</button>
@@ -158,6 +159,7 @@
 
 <script>
     const channels = {
+        'jio_hotstar': 'https://teamro07ifrm.pages.dev/',
         'fox_501': 'https://teamroiframe07.pages.dev/',
         'cricbuzz_1': 'https://paste.fledding.com/~Willo.html',
         'cricbuzz_2': 'https://teamrocricbuzz2.pages.dev/',
@@ -197,7 +199,7 @@
         else if (slug === 'criclife') {
             cropClass = 'class="criclife-crop"';
         } 
-        else if (slug === 'ss2hd' || slug === 'ss2hd_hindi') {
+        else if (slug === 'ss2hd' || slug === 'ss2hd_hindi' || slug === 'jio_hotstar') {
             cropClass = 'class="ss2-custom-crop"';
         }
         else {
