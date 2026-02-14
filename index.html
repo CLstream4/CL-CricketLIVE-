@@ -125,6 +125,10 @@
     <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_2')">CRICBUZZ 2</button>
     <button class="channel-button wpl-btn" onclick="loadMatch('wpl_live')">Willow Cricbuzz</button>
     <button class="channel-button hotstar-btn" onclick="loadMatch('hotstar_live')">Star Sports 1 HD Hindi</button>
+    
+    <button class="channel-button" style="background: linear-gradient(45deg, #001524, #004e92); border: 1px solid #00d2ff;" onclick="loadMatch('ss_hd')">SS HD</button>
+    <button class="channel-button" style="background: linear-gradient(45deg, #001524, #004e92); border: 1px solid #00d2ff;" onclick="loadMatch('ss1_sd_hindi')">SS1 SD Hindi</button>
+    
     <button class="channel-button fox-btn" onclick="loadMatch('fox_cricket')">FOX CRICKET</button>
     <button class="channel-button criclife-btn" onclick="loadMatch('criclife')">CRICLIFE</button>
     <button class="channel-button special-btn" onclick="loadMatch('prime_live')">PRIME LIVE</button>
@@ -158,6 +162,8 @@
         'cricbuzz_1': 'https://paste.fledding.com/~Willo.html',
         'cricbuzz_2': 'https://teamrocricbuzz2.pages.dev/',
         'hotstar_live': 'https://allinonereborntg.github.io/jtv-plus/player.html?id=174',
+        'ss_hd': 'https://cricketstan.github.io/Channel-14/',
+        'ss1_sd_hindi': 'https://matcheslinks-eaa.pages.dev/jio?id=1985',
         'fox_cricket': 'https://match-central.pages.dev/?id=fox',
         'wpl_live': 'https://allinonereborn.xyz/mpd/willo.html',
         'criclife': 'https://run-machine.pages.dev/?id=willow',
@@ -182,7 +188,7 @@
         document.getElementById('loading-skeleton').style.display = 'block';
         
         let cropClass = '';
-        if (['hub_sports', 'prime_event', 'hotstar_live', 'willow', 'cricbuzz_1', 'cricbuzz_2', 'ss2sd', 'ss1_tamil', 'ss1_telugu', 'wpl_live', 'sky_nz_4k', 'prime_live'].includes(slug)) {
+        if (['hub_sports', 'prime_event', 'hotstar_live', 'willow', 'cricbuzz_1', 'cricbuzz_2', 'ss2sd', 'ss1_tamil', 'ss1_telugu', 'wpl_live', 'sky_nz_4k', 'prime_live', 'ss_hd', 'ss1_sd_hindi'].includes(slug)) {
             cropClass = 'class="fixed-controls"';
         } 
         else if (slug === 'fox_cricket') {
