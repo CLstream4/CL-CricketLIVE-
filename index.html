@@ -32,26 +32,15 @@
         .green-dot { height: 7px; width: 7px; background-color: #00ff00; border-radius: 50%; display: inline-block; margin-right: 4px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* VIDEO WRAPPER OPTIMIZED */
-        .video-wrapper { 
-            width: 96%; max-width: 850px; margin: 20px auto; background: #000; border: 1px solid rgba(0, 210, 255, 0.5); 
-            border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 9; position: relative;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
-        }
-
-        #main-player { 
-            width: 100%; height: 100%; border: 0; position: absolute; left: 0; z-index: 1; 
-            transform-origin: top center; 
-            will-change: transform;
-        }
+        /* VIDEO WRAPPER */
+        .video-wrapper { width: 96%; max-width: 850px; margin: 20px auto; background: #000; border: 1px solid rgba(0, 210, 255, 0.5); border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 9; position: relative; box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); }
+        #main-player { width: 100%; height: 100%; border: 0; position: absolute; left: 0; z-index: 1; transform-origin: top center; will-change: transform; }
         
-        /* CROPS PERFECTED */
-        .fox-crop { height: 175% !important; top: -65% !important; transform: scale(1.02); }
-        .criclife-crop { height: 180% !important; top: -63% !important; transform: scale(1.03); }
-        .standard-crop { height: 160% !important; top: -35% !important; transform: scale(1.05); }
-        .hindi-custom-crop { height: 168% !important; top: -40% !important; transform: scale(1.06); }
+        /* CROPS */
         .ss2-custom-crop { height: 165% !important; top: -38% !important; transform: scale(1.05); }
-        .prime-zoom-hindi { height: 120% !important; top: -10% !important; transform: scale(1.15); }
+        .criclife-crop { height: 180% !important; top: -63% !important; transform: scale(1.03); }
+        .sky-sports-crop { height: 115% !important; top: -8% !important; transform: scale(1.1); }
+        .willow-crop { height: 115% !important; top: -8% !important; transform: scale(1.1); }
         .fixed-controls { height: 100% !important; top: 0 !important; transform: scale(1) !important; }
 
         .skeleton { width: 100%; height: 100%; background: linear-gradient(90deg, #0f172a 25%, #1e293b 50%, #0f172a 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; display: none; position: absolute; top: 0; left: 0; z-index: 5; }
@@ -62,33 +51,24 @@
         .reaction-bar { display: none; justify-content: center; gap: 12px; margin: 15px auto; }
         .react-btn { font-size: 24px; cursor: pointer; transition: 0.2s; background: rgba(255,255,255,0.1); padding: 8px; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); color: white; }
         
-        /* EMOJI FIX */
-        .floating-emoji { 
-            position: fixed; 
-            bottom: 50px; 
-            left: 50%; 
-            pointer-events: none; 
-            font-size: 45px; 
-            z-index: 99999; 
-            animation: popBounce 2.5s ease-out forwards; 
-        }
-        @keyframes popBounce { 
-            0% { transform: translateY(0) scale(0); opacity: 0; } 
-            20% { transform: translateY(-50px) scale(1.2); opacity: 1; } 
-            100% { transform: translateY(-500px) translateX(30px) rotate(20deg); opacity: 0; } 
-        }
+        .floating-emoji { position: fixed; bottom: 50px; left: 50%; pointer-events: none; font-size: 45px; z-index: 99999; animation: popBounce 2.5s ease-out forwards; }
+        @keyframes popBounce { 0% { transform: translateY(0) scale(0); opacity: 0; } 20% { transform: translateY(-50px) scale(1.2); opacity: 1; } 100% { transform: translateY(-500px) translateX(30px) rotate(20deg); opacity: 0; } }
 
-        .channel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px auto; max-width: 94%; }
+        /* GRID SYSTEM */
+        .channel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px auto 20px auto; max-width: 94%; }
         .channel-button { border: none; padding: 12px 5px; font-size: 11px; font-weight: bold; border-radius: 8px; cursor: pointer; text-transform: uppercase; color: white; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(0, 210, 255, 0.3); transition: 0.2s; }
         .channel-button:active { transform: scale(0.95); }
 
-        .fox501-btn { background: linear-gradient(45deg, #00c6ff, #0072ff) !important; color: #fff !important; }
-        .cricbuzz-btn { background: linear-gradient(45deg, #1d976c, #93f9b9) !important; color: #000 !important; }
         .hotstar-btn { background: linear-gradient(45deg, #001524, #004e92) !important; color: #fff !important; }
+        .cricbuzz-btn { background: linear-gradient(45deg, #1d976c, #93f9b9) !important; color: #000 !important; }
         .fox-btn { background: linear-gradient(45deg, #ff9900, #ff5500) !important; color: #fff !important; }
-        .wpl-btn { background: linear-gradient(45deg, #ff0080, #7928ca) !important; color: #fff !important; }
         .criclife-btn { background: linear-gradient(45deg, #f44336, #ff9800) !important; color: #fff !important; }
         .special-btn { background: linear-gradient(45deg, #f9a8d4, #00d2ff) !important; color: #000 !important; }
+        
+        /* JIO TV INDIA ONLY STYLING */
+        .worldwide-toggle-btn { grid-column: span 2; padding: 15px; background: linear-gradient(90deg, #1e293b, #0f172a); border: 2px solid #00d2ff; color: #00d2ff; font-family: 'Orbitron', sans-serif; font-size: 14px; border-radius: 12px; cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .worldwide-btn { background: rgba(0, 210, 255, 0.1) !important; border: 1px solid rgba(0, 210, 255, 0.6) !important; }
+        #worldwide-container { display: none; width: 100%; grid-column: span 2; }
 
         #sharePreview { font-size: 10px; color: #00d2ff; background: rgba(17, 24, 39, 0.8); padding: 10px; border-radius: 4px; flex-grow: 1; border: 1px solid rgba(51, 65, 85, 0.5); text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         .copy-btn { background: linear-gradient(90deg, #00d2ff, #0072ff); color: white; border: none; padding: 10px 15px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
@@ -131,36 +111,42 @@
 
 <div class="reaction-bar" id="reaction-bar">
     <div class="react-btn" onclick="react('🔥')">🔥</div>
-    <div class="react-btn" onclick="react('👏')">👏</div>
+    <div class="react-btn" onclick="react('6️⃣')">6️⃣</div>
     <div class="react-btn" onclick="react('🤩')">🤩</div>
-    <div class="react-btn" onclick="react('🏏')">🏏</div>
-    <div class="react-btn" onclick="react('💯')">💯</div>
+    <div class="react-btn" onclick="react('4️⃣')">4️⃣</div>
+    <div class="react-btn" onclick="react('🥳')">🥳</div>
 </div>
 
 <a href="/" id="view-all-btn">Show All Channels</a>
 
 <div class="channel-grid" id="main-grid">
     <button class="channel-button hotstar-btn" onclick="loadMatch('jio_hotstar')">JIO HOTSTAR</button>
-    <button class="channel-button fox501-btn" onclick="loadMatch('fox_501')">FOX 501 LIVE</button>
     <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_1')">CRICBUZZ 1</button>
     <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_2')">CRICBUZZ 2</button>
     <button class="channel-button wpl-btn" onclick="loadMatch('wpl_live')">Willow Cricbuzz</button>
     <button class="channel-button hotstar-btn" onclick="loadMatch('hotstar_live')">Star Sports 1 HD Hindi</button>
-    <button class="channel-button hotstar-btn" style="background: linear-gradient(45deg, #001524, #004e92);" onclick="loadMatch('star_2_hd_hindi')">Star 2 HD हिन्दी</button>
+    <button class="channel-button hotstar-btn" onclick="loadMatch('ss2hd_hindi_new')">Star 2 HD हिन्दी</button>
     <button class="channel-button" style="background: linear-gradient(45deg, #001524, #004e92); border: 1px solid #00d2ff;" onclick="loadMatch('ss_hd')">SS HD</button>
     <button class="channel-button" style="background: linear-gradient(45deg, #001524, #004e92); border: 1px solid #00d2ff;" onclick="loadMatch('ss1_sd_hindi')">SS1 SD Hindi</button>
     <button class="channel-button fox-btn" onclick="loadMatch('fox_cricket')">FOX CRICKET</button>
     <button class="channel-button criclife-btn" onclick="loadMatch('criclife')">CRICLIFE</button>
     <button class="channel-button special-btn" onclick="loadMatch('prime_live')">PRIME LIVE</button>
-    <button class="channel-button" style="background: linear-gradient(45deg, #1a1a1a, #000); border: 1px solid #00d2ff;" onclick="loadMatch('sky_nz_4k')">Sky Sports NZ 4k</button>
     <button class="channel-button" style="background: linear-gradient(45deg, #00, #333); border: 1px solid #00d2ff;" onclick="loadMatch('prime_event')">PRIME EVENT</button>
-    <button class="channel-button" style="background: linear-gradient(45deg, #8b0000, #ff0000); border: 1px solid #fff;" onclick="loadMatch('hub_sports')">HUB SPORTS</button>
-    <button class="channel-button" onclick="loadMatch('ss2sd')">SS 2 SD</button>
     <button class="channel-button" onclick="loadMatch('ss2hd')">SS 2 HD</button>
-    <button class="channel-button" style="background: linear-gradient(45deg, #1f4068, #1b1b2f); border: 1px solid #00d2ff;" onclick="loadMatch('ss2hd_hindi')">STAR SPORTS 2 HD HINDI</button>
     <button class="channel-button" style="grid-column: span 1;" onclick="loadMatch('willow')">WILLOW SPORTS</button>
-    <button class="channel-button" style="background: linear-gradient(45deg, #d32f2f, #7b1fa2);" onclick="loadMatch('ss1_tamil')">Star Sports 1 HD Tamil</button>
-    <button class="channel-button" style="background: linear-gradient(45deg, #1976d2, #388e3c);" onclick="loadMatch('ss1_telugu')">Star Sports 1 HD Telugu</button>
+    
+    <button class="worldwide-toggle-btn" id="ww-toggle" onclick="toggleWorldWide()">JIO TV INDIA ONLY 🇮🇳 <i class="fas fa-chevron-down"></i></button>
+
+    <div id="worldwide-container">
+        <div class="channel-grid" style="margin-top:10px;">
+            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss1_hd_hindi')">Star Sports 1 HD Hindi</button>
+            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss1_telugu')">Star Sports 1 Telugu</button>
+            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss1_tamil')">Star Sports 1 Tamil</button>
+            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_sky_cricket')">Sky Sports Cricket HD</button>
+            <button class="channel-button worldwide-btn" onclick="loadMatch('willow_cricbuzz_1')">Willow Cricbuzz</button>
+            <button class="channel-button worldwide-btn" onclick="loadMatch('willow_cricbuzz_2')">Willow Cricbuzz 2</button>
+        </div>
+    </div>
 </div>
 
 <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 15px auto; width: 94%;">
@@ -177,51 +163,62 @@
 <script>
     const channels = {
         'jio_hotstar': 'https://teamro07ifrm.pages.dev/',
-        'fox_501': 'https://teamroiframe07.pages.dev/',
-        'cricbuzz_1': 'https://t20wc-livid.vercel.app/cricbuzz1', // Link Updated Here
+        'cricbuzz_1': 'https://t20wc-livid.vercel.app/cricbuzz1',
         'cricbuzz_2': 'https://teamrocricbuzz2.pages.dev/',
         'hotstar_live': 'https://matcheslinks-eaa.pages.dev/jio?id=1108',
-        'star_2_hd_hindi': 'https://teamro11.pages.dev/',
+        'ss2hd_hindi_new': 'https://teamro11.pages.dev/',
         'ss_hd': 'https://cricketstan.github.io/Channel-14/',
         'ss1_sd_hindi': 'https://matcheslinks-eaa.pages.dev/jio?id=1985',
         'fox_cricket': 'https://matcheslinks-eaa.pages.dev/jio?id=1109',
         'wpl_live': 'https://paste.fledding.com/~Prime.html',
         'criclife': 'https://run-machine.pages.dev/?id=willow',
         'prime_live': 'https://paste.fledding.com/~Hin.html',
-        'sky_nz_4k': 'https://allinonereborn.xyz/mpd/nz1.html',
         'prime_event': 'https://paste.fledding.com/~Prime.html',
-        'hub_sports': 'https://allinonereborn.xyz/mpd/hub_sprts.html',
-        'ss2sd': 'https://insiderlivehd.pages.dev/English',
         'ss2hd': 'https://insiderlivehd.pages.dev/Fox',
-        'ss2hd_hindi': 'https://teamroiframe11.pages.dev/',
         'willow': 'https://paste.fledding.com/~Willow.html',
-        'ss1_tamil': 'https://allinonereborntg.github.io/jtv-plus/player.html?id=4468',
-        'ss1_telugu': 'https://allinonereborntg.github.io/jtv-plus/player.html?id=4471'
+        
+        /* JIO TV SECTION */
+        'jio_ss1_hd_hindi': 'https://allinonereborn-jiotv.pages.dev/player.html?id=174',
+        'jio_ss1_telugu': 'https://allinonereborn-jiotv.pages.dev/player.html?id=4471',
+        'jio_ss1_tamil': 'https://allinonereborn-jiotv.pages.dev/player.html?id=4468',
+        'jio_sky_cricket': 'https://allinonereborn.online/airteltv-web/player.html?url=https%3A%2F%2Fallinonereborn.online%2Fairteltv-web%2Flive3.php%3Fid%3D577991',
+        'willow_cricbuzz_1': 'https://allinonereborn.online/airteltv-web/player.html?url=https%3A%2F%2Fallinonereborn.online%2Fairteltv-web%2Flive3.php%3Fid%3D741863',
+        'willow_cricbuzz_2': 'https://allinonereborn.online/airteltv-web/player.html?url=https%3A%2F%2Fallinonereborn.online%2Fairteltv-web%2Flive3.php%3Fid%3D741860'
     };
 
     let currentChannel = null;
     let popupClosed = false;
+
+    function toggleWorldWide() {
+        const container = document.getElementById('worldwide-container');
+        const toggleBtn = document.getElementById('ww-toggle');
+        if (container.style.display === "block") {
+            container.style.display = "none";
+            toggleBtn.innerHTML = 'JIO TV INDIA ONLY 🇮🇳 <i class="fas fa-chevron-down"></i>';
+        } else {
+            container.style.display = "block";
+            toggleBtn.innerHTML = 'CLOSE JIO TV <i class="fas fa-chevron-up"></i>';
+        }
+    }
 
     function loadMatch(slug) {
         currentChannel = slug;
         const container = document.getElementById('player-container');
         document.getElementById('loading-skeleton').style.display = 'block';
         
-        let cropClass = '';
-        if (['hub_sports', 'prime_event', 'willow', 'cricbuzz_1', 'cricbuzz_2', 'ss2sd', 'ss1_tamil', 'ss1_telugu', 'wpl_live', 'sky_nz_4k', 'prime_live', 'ss_hd', 'ss1_sd_hindi', 'hotstar_live', 'fox_cricket'].includes(slug)) {
-            cropClass = 'class="fixed-controls"';
-        } 
-        else if (slug === 'star_2_hd_hindi') {
-            cropClass = 'class="hindi-custom-crop"';
-        }
-        else if (slug === 'criclife') {
+        let cropClass = 'class="fixed-controls"';
+        
+        if (slug === 'criclife') {
             cropClass = 'class="criclife-crop"';
         } 
-        else if (slug === 'ss2hd' || slug === 'ss2hd_hindi' || slug === 'jio_hotstar') {
+        else if (slug === 'ss2hd' || slug === 'jio_hotstar' || slug === 'ss2hd_hindi_new') {
             cropClass = 'class="ss2-custom-crop"';
         }
-        else {
-            cropClass = 'class="standard-crop"';
+        else if (slug === 'jio_sky_cricket') {
+            cropClass = 'class="sky-sports-crop"';
+        }
+        else if (slug === 'willow_cricbuzz_1' || slug === 'willow_cricbuzz_2') {
+            cropClass = 'class="willow-crop"';
         }
         
         container.innerHTML = `<iframe id="main-player" ${cropClass} src="${channels[slug]}" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" allow="autoplay; encrypted-media; fullscreen" scrolling="no" onload="hideSkeleton()"></iframe>`;
