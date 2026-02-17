@@ -80,7 +80,6 @@
         .join-tg { background: rgba(0, 136, 204, 0.2); border: 1px solid #0088cc; }
 
         .hidden-mode { display: none !important; }
-        #view-all-btn { display: none; margin: 10px auto; background: #ffffff; color: #000; padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 12px; width: fit-content; border: 2px solid #00d2ff; }
     </style>
 </head>
 <body>
@@ -111,13 +110,11 @@
 
 <div class="reaction-bar" id="reaction-bar">
     <div class="react-btn" onclick="react('🔥')">🔥</div>
-    <div class="react-btn" onclick="react('6️⃣')">6️⃣</div>
-    <div class="react-btn" onclick="react('🤩')">🤩</div>
+    <div class="react-btn" onclick="react('6️⃣)">6️⃣</div>
+    <div class="react-btn" onclick="react('♥️')">♥️</div>
     <div class="react-btn" onclick="react('4️⃣')">4️⃣</div>
-    <div class="react-btn" onclick="react('🥳')">🥳</div>
+    <div class="react-btn" onclick="react('🤩')">🤩</div>
 </div>
-
-<a href="/" id="view-all-btn">Show All Channels</a>
 
 <div class="channel-grid" id="main-grid">
     <button class="channel-button hotstar-btn" onclick="loadMatch('jio_hotstar')">JIO HOTSTAR</button>
@@ -252,7 +249,6 @@
             document.getElementById('site-header').classList.add('hidden-mode');
             document.getElementById('share-header').style.display = 'block';
             document.getElementById('main-grid').classList.add('hidden-mode');
-            document.getElementById('view-all-btn').style.display = 'block';
         }
     };
 </script>
