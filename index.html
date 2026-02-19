@@ -120,7 +120,7 @@
     <button class="channel-button hotstar-btn" onclick="loadMatch('jio_hotstar')">JIO HOTSTAR</button>
     <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_1')">CRICBUZZ 1</button>
     <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_2')">CRICBUZZ 2</button>
-    <button class="channel-button wpl-btn" onclick="loadMatch('wpl_live')">Willow Cricbuzz</button>
+    <button class="channel-button wpl-btn" onclick="loadMatch('willow_cricbuzz_main')">Willow Cricbuzz</button>
     <button class="channel-button hotstar-btn" onclick="loadMatch('hotstar_live')">Star Sports 1 HD Hindi</button>
     <button class="channel-button hotstar-btn" onclick="loadMatch('ss2hd_hindi_new')">Star 2 HD हिन्दी</button>
     <button class="channel-button" style="background: linear-gradient(45deg, #001524, #004e92); border: 1px solid #00d2ff;" onclick="loadMatch('ss_hd')">SS HD</button>
@@ -171,7 +171,7 @@
         'ss_hd': 'https://cricketstan.github.io/Channel-14/',
         'ss1_sd_hindi': 'https://matcheslinks-eaa.pages.dev/jio?id=1985',
         'fox_cricket': 'https://matcheslinks-eaa.pages.dev/jio?id=1109',
-        'wpl_live': 'https://paste.fledding.com/~Prime.html',
+        'willow_cricbuzz_main': 'https://allinonereborn.online/mpd/willo.html', // Fixed Copy Name & Link
         'criclife': 'https://run-machine.pages.dev/?id=willow',
         'prime_live': 'https://paste.fledding.com/~Hin.html',
         'prime_event': 'https://paste.fledding.com/~Prime.html',
@@ -186,7 +186,6 @@
         'willow_cricbuzz_1': 'https://allinonereborn.online/airteltv-web/player.html?url=https%3A%2F%2Fallinonereborn.online%2Fairteltv-web%2Flive3.php%3Fid%3D741863',
         'willow_cricbuzz_2': 'https://allinonereborn.online/airteltv-web/player.html?url=https%3A%2F%2Fallinonereborn.online%2Fairteltv-web%2Flive3.php%3Fid%3D741860',
         
-        /* NEW JIO TV CHANNELS */
         'jio_ss_select1_sd': 'https://allinonereborn-jiotv.pages.dev/player?id=1123',
         'jio_ss_select1_hd': 'https://allinonereborn-jiotv.pages.dev/player?id=300',
         'jio_ss3': 'https://allinonereborn-jiotv.pages.dev/player?id=147',
@@ -227,6 +226,7 @@
         else if (slug === 'willow_cricbuzz_1' || slug === 'willow_cricbuzz_2') {
             cropClass = 'class="willow-crop"';
         }
+        // Willow Cricbuzz Main - No crop (Fixed Controls)
         
         container.innerHTML = `<iframe id="main-player" ${cropClass} src="${channels[slug]}" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" allow="autoplay; encrypted-media; fullscreen" scrolling="no" onload="hideSkeleton()"></iframe>`;
         
