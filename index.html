@@ -9,10 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Poppins:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
     
     <style>
-        /* Device compatibility & Smoothness fix */
         * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         html, body { overflow-x: hidden; width: 100%; position: relative; }
-        
         body { margin: 0; background-color: #050810; color: white; font-family: 'Poppins', sans-serif; text-align: center; padding-bottom: 20px; -webkit-tap-highlight-color: transparent; }
         
         /* POPUP */
@@ -36,14 +34,17 @@
         .green-dot { height: 7px; width: 7px; background-color: #00ff00; border-radius: 50%; display: inline-block; margin-right: 4px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* VIDEO WRAPPER PERFORMANCE */
+        /* VIDEO WRAPPER */
         .video-wrapper { width: 96%; max-width: 850px; margin: 20px auto; background: #000; border: 1px solid rgba(0, 210, 255, 0.5); border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 9; position: relative; box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); transform: translateZ(0); }
         #main-player { width: 100%; height: 100%; border: 0; position: absolute; left: 0; z-index: 1; transform-origin: top center; will-change: transform; transition: opacity 0.3s; }
         
         .ss2-custom-crop { height: 165% !important; top: -38% !important; transform: scale(1.05); }
         .criclife-crop { height: 180% !important; top: -63% !important; transform: scale(1.03); }
         .sky-sports-crop { height: 115% !important; top: -8% !important; transform: scale(1.1); }
-        .willow-crop { height: 115% !important; top: -8% !important; transform: scale(1.1); }
+        
+        /* Astro Cricket Zoom (Same as Willow) */
+        .willow-crop, .astro-crop { height: 115% !important; top: -8% !important; transform: scale(1.1); }
+        
         .fixed-controls { height: 100% !important; top: 0 !important; transform: scale(1) !important; }
 
         .skeleton { width: 100%; height: 100%; background: linear-gradient(90deg, #0f172a 25%, #1e293b 50%, #0f172a 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; display: none; position: absolute; top: 0; left: 0; z-index: 5; }
@@ -208,7 +209,6 @@
         'ww_ss2_sd': 'https://allinonereborn-jiotv.pages.dev/player_world?id=1141',
         'ww_ss2_hd': 'https://allinonereborn-jiotv.pages.dev/player_world?id=4456',
 
-        /* JIO TV SECTION + ASTRO CRICKET */
         'jio_astro_cricket': 'https://allinonereborn.online/airteltv-web/player.html?url=https%3A%2F%2Fallinonereborn.online%2Fairteltv-web%2Flive3.php%3Fid%3D1163988',
         'jio_ss1_hd_hindi': 'https://allinonereborn-jiotv.pages.dev/player.html?id=174',
         'jio_ss1_telugu': 'https://allinonereborn-jiotv.pages.dev/player.html?id=4471',
@@ -248,14 +248,16 @@
         if (slug === 'criclife') cropClass = 'class="criclife-crop"';
         else if (['ss2hd', 'jio_hotstar', 'ss2hd_hindi_new'].includes(slug)) cropClass = 'class="ss2-custom-crop"';
         else if (slug === 'jio_sky_cricket') cropClass = 'class="sky-sports-crop"';
-        else if (['willow_cricbuzz_1', 'willow_cricbuzz_2'].includes(slug)) cropClass = 'class="willow-crop"';
+        else if (['willow_cricbuzz_1', 'willow_cricbuzz_2', 'jio_astro_cricket'].includes(slug)) cropClass = 'class="astro-crop"';
         
-        // Smooth player loading
         container.innerHTML = `<iframe id="main-player" ${cropClass} src="${channels[slug]}" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" allow="autoplay; encrypted-media; fullscreen" scrolling="no" loading="lazy" onload="hideSkeleton()"></iframe>`;
         
         if(popupClosed) showUIParts();
         document.getElementById('watermark').style.display = 'inline-block';
-        document.getElementById('sharePreview').innerText = window.location.origin + window.location.pathname + "?ch=" + slug;
+        
+        // SHORT URL LOGIC
+        const shortUrl = window.location.origin + "/?ch=" + slug;
+        document.getElementById('sharePreview').innerText = shortUrl;
     }
 
     function hideSkeleton() { document.getElementById('loading-skeleton').style.display = 'none'; }
