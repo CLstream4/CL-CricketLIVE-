@@ -42,9 +42,7 @@
         .criclife-crop { height: 180% !important; top: -63% !important; transform: scale(1.03); }
         .sky-sports-crop { height: 115% !important; top: -8% !important; transform: scale(1.1); }
         
-        /* Astro Cricket Zoom (Same as Willow) */
         .willow-crop, .astro-crop { height: 115% !important; top: -8% !important; transform: scale(1.1); }
-        
         .fixed-controls { height: 100% !important; top: 0 !important; transform: scale(1) !important; }
 
         .skeleton { width: 100%; height: 100%; background: linear-gradient(90deg, #0f172a 25%, #1e293b 50%, #0f172a 75%); background-size: 200% 100%; animation: skeleton-loading 1.5s infinite; display: none; position: absolute; top: 0; left: 0; z-index: 5; }
@@ -71,7 +69,6 @@
         
         .worldwide-toggle-btn { grid-column: span 2; padding: 15px; background: linear-gradient(90deg, #1e293b, #0f172a); border: 2px solid #00d2ff; color: #00d2ff; font-family: 'Orbitron', sans-serif; font-size: 14px; border-radius: 12px; cursor: pointer; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .worldwide-btn { background: rgba(0, 210, 255, 0.1) !important; border: 1px solid rgba(0, 210, 255, 0.6) !important; }
-        
         .ww-section-btn { background: linear-gradient(90deg, #3b0f2e, #1a0510) !important; border: 2px solid #f9a8d4 !important; color: #f9a8d4 !important; }
 
         #worldwide-container, #worldwide-section-container { display: none; width: 100%; grid-column: span 2; }
@@ -90,22 +87,26 @@
 </head>
 <body>
 
-<div id="entry-popup">
-    <div class="pop-box">
-        <div class="support-text">🚀 JOIN US</div>
-        <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="pop-btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i> WHATSAPP GROUP</a>
-        <a href="https://t.me/TheCricketLIVEOfficial" target="_blank" class="pop-btn" style="background:#0088cc;"><i class="fab fa-telegram"></i> TELEGRAM CHANNEL</a>
-        <div style="margin-top:18px; cursor:pointer; font-size:11px; color:#00d2ff; font-weight:bold; text-decoration:underline;" onclick="closePopup()">CONTINUE TO STREAM</div>
+<div id="full-site-content">
+    <div id="entry-popup">
+        <div class="pop-box">
+            <div class="support-text">🚀 JOIN US</div>
+            <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="pop-btn" style="background:#25D366;"><i class="fab fa-whatsapp"></i> WHATSAPP GROUP</a>
+            <a href="https://t.me/TheCricketLIVEOfficial" target="_blank" class="pop-btn" style="background:#0088cc;"><i class="fab fa-telegram"></i> TELEGRAM CHANNEL</a>
+            <div style="margin-top:18px; cursor:pointer; font-size:11px; color:#00d2ff; font-weight:bold; text-decoration:underline;" onclick="closePopup()">CONTINUE TO STREAM</div>
+        </div>
     </div>
+
+    <div class="floating-sidebar">
+        <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="sidebar-icon sidebar-wp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://t.me/TheCricketLIVEOfficial" target="_blank" class="sidebar-icon sidebar-tg"><i class="fab fa-telegram"></i></a>
+    </div>
+
+    <header class="header" id="site-header"><h1>CRICKETLIVE! OFFICIAL</h1></header>
 </div>
 
-<div class="floating-sidebar">
-    <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="sidebar-icon sidebar-wp"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://t.me/TheCricketLIVEOfficial" target="_blank" class="sidebar-icon sidebar-tg"><i class="fab fa-telegram"></i></a>
-</div>
-
-<header class="header" id="site-header"><h1>CRICKETLIVE! OFFICIAL</h1></header>
 <div class="share-header" id="share-header"><h1>CRICKETLIVE! OFFICIAL</h1></div>
+
 <div id="live-signal-box"><div id="live-signal"><span class="green-dot"></span>LIVE</div></div>
 
 <div class="video-wrapper">
@@ -122,65 +123,65 @@
     <div class="react-btn" onclick="react('🤩')">🤩</div>
 </div>
 
-<div class="channel-grid" id="main-grid">
-    <button class="channel-button hotstar-btn" onclick="loadMatch('jio_hotstar')">JIO HOTSTAR</button>
-    <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_1')">CRICBUZZ 1</button>
-    <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_2')">CRICBUZZ 2</button>
-    <button class="channel-button wpl-btn" onclick="loadMatch('willow_cricbuzz_main')">Willow Cricbuzz</button>
-    <button class="channel-button hotstar-btn" onclick="loadMatch('hotstar_live')">Star Sports 1 HD Hindi</button>
-    <button class="channel-button hotstar-btn" onclick="loadMatch('ss2hd_hindi_new')">Star 2 HD हिन्दी</button>
-    <button class="channel-button" style="background: linear-gradient(45deg, #001524, #004e92); border: 1px solid #00d2ff;" onclick="loadMatch('ss_hd')">SS HD</button>
-    <button class="channel-button" style="background: linear-gradient(45deg, #001524, #004e92); border: 1px solid #00d2ff;" onclick="loadMatch('ss1_sd_hindi')">SS1 SD Hindi</button>
-    <button class="channel-button fox-btn" onclick="loadMatch('fox_cricket')">FOX CRICKET</button>
-    <button class="channel-button criclife-btn" onclick="loadMatch('criclife')">CRICLIFE</button>
-    <button class="channel-button special-btn" onclick="loadMatch('prime_live')">PRIME LIVE</button>
-    <button class="channel-button" style="background: linear-gradient(45deg, #00, #333); border: 1px solid #00d2ff;" onclick="loadMatch('prime_event')">PRIME EVENT</button>
-    <button class="channel-button" onclick="loadMatch('ss2hd')">SS 2 HD</button>
-    <button class="channel-button" style="grid-column: span 1;" onclick="loadMatch('willow')">WILLOW SPORTS</button>
-    
-    <button class="worldwide-toggle-btn ww-section-btn" id="ww-section-toggle" onclick="toggleWorldWideSection()">WORLD WIDE 🌎 <i class="fas fa-chevron-down"></i></button>
-    
-    <div id="worldwide-section-container">
-        <div class="channel-grid" style="margin-top:10px;">
-            <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss1_sd_hindi')">Star Sports 1 SD Hindi</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss1_hd_hindi')">Star Sports 1 HD Hindi</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss1_sd')">Star Sports 1 SD</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss1_hd')">Star Sports 1 HD</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss2_sd_hindi')">Star Sports 2 SD Hindi</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss2_hd_hindi')">Star Sports 2 HD Hindi</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss2_sd')">Star Sports 2 SD</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss2_hd')">Star Sports 2 HD</button>
+<div id="main-ui-controls">
+    <div class="channel-grid" id="main-grid">
+        <button class="channel-button hotstar-btn" onclick="loadMatch('jio_hotstar')">JIO HOTSTAR</button>
+        <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_1')">CRICBUZZ 1</button>
+        <button class="channel-button cricbuzz-btn" onclick="loadMatch('cricbuzz_2')">CRICBUZZ 2</button>
+        <button class="channel-button wpl-btn" onclick="loadMatch('willow_cricbuzz_main')">Willow Cricbuzz</button>
+        <button class="channel-button hotstar-btn" onclick="loadMatch('hotstar_live')">Star Sports 1 HD Hindi</button>
+        <button class="channel-button hotstar-btn" onclick="loadMatch('ss2hd_hindi_new')">Star 2 HD हिन्दी</button>
+        <button class="channel-button" style="background: linear-gradient(45deg, #001524, #004e92); border: 1px solid #00d2ff;" onclick="loadMatch('ss_hd')">SS HD</button>
+        <button class="channel-button" style="background: linear-gradient(45deg, #001524, #004e92); border: 1px solid #00d2ff;" onclick="loadMatch('ss1_sd_hindi')">SS1 SD Hindi</button>
+        <button class="channel-button fox-btn" onclick="loadMatch('fox_cricket')">FOX CRICKET</button>
+        <button class="channel-button criclife-btn" onclick="loadMatch('criclife')">CRICLIFE</button>
+        <button class="channel-button special-btn" onclick="loadMatch('prime_live')">PRIME LIVE</button>
+        <button class="channel-button" style="background: linear-gradient(45deg, #00, #333); border: 1px solid #00d2ff;" onclick="loadMatch('prime_event')">PRIME EVENT</button>
+        <button class="channel-button" onclick="loadMatch('ss2hd')">SS 2 HD</button>
+        <button class="channel-button" style="grid-column: span 1;" onclick="loadMatch('willow')">WILLOW SPORTS</button>
+        
+        <button class="worldwide-toggle-btn ww-section-btn" id="ww-section-toggle" onclick="toggleWorldWideSection()">WORLD WIDE 🌎 <i class="fas fa-chevron-down"></i></button>
+        <div id="worldwide-section-container">
+            <div class="channel-grid" style="margin-top:10px;">
+                <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss1_sd_hindi')">Star Sports 1 SD Hindi</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss1_hd_hindi')">Star Sports 1 HD Hindi</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss1_sd')">Star Sports 1 SD</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss1_hd')">Star Sports 1 HD</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss2_sd_hindi')">Star Sports 2 SD Hindi</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss2_hd_hindi')">Star Sports 2 HD Hindi</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss2_sd')">Star Sports 2 SD</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('ww_ss2_hd')">Star Sports 2 HD</button>
+            </div>
+        </div>
+
+        <button class="worldwide-toggle-btn" id="ww-toggle" onclick="toggleWorldWide()">JIO TV INDIA ONLY 🇮🇳 <i class="fas fa-chevron-down"></i></button>
+        <div id="worldwide-container">
+            <div class="channel-grid" style="margin-top:10px;">
+                <button class="channel-button worldwide-btn" onclick="loadMatch('jio_astro_cricket')">Astro Cricket 🏏</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss1_hd_hindi')">Star Sports 1 HD Hindi</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss1_telugu')">Star Sports 1 Telugu</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss1_tamil')">Star Sports 1 Tamil</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('jio_sky_cricket')">Sky Sports Cricket HD</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('willow_cricbuzz_1')">Willow Cricbuzz</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('willow_cricbuzz_2')">Willow Cricbuzz 2</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss_select1_sd')">Star Sports Select 1 SD</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss_select1_hd')">Star Sports Select 1 HD</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss3')">Star Sports 3</button>
+                <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss_khel')">Star Sports Khel</button>
+            </div>
         </div>
     </div>
 
-    <button class="worldwide-toggle-btn" id="ww-toggle" onclick="toggleWorldWide()">JIO TV INDIA ONLY 🇮🇳 <i class="fas fa-chevron-down"></i></button>
-
-    <div id="worldwide-container">
-        <div class="channel-grid" style="margin-top:10px;">
-            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_astro_cricket')">Astro Cricket 🏏</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss1_hd_hindi')">Star Sports 1 HD Hindi</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss1_telugu')">Star Sports 1 Telugu</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss1_tamil')">Star Sports 1 Tamil</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_sky_cricket')">Sky Sports Cricket HD</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('willow_cricbuzz_1')">Willow Cricbuzz</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('willow_cricbuzz_2')">Willow Cricbuzz 2</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss_select1_sd')">Star Sports Select 1 SD</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss_select1_hd')">Star Sports Select 1 HD</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss3')">Star Sports 3</button>
-            <button class="channel-button worldwide-btn" onclick="loadMatch('jio_ss_khel')">Star Sports Khel</button>
-        </div>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 15px auto; width: 94%;">
+        <div id="sharePreview">Select a channel...</div>
+        <button class="copy-btn" id="copyBtn" onclick="copyShareMessage()">COPY</button>
+        <button class="wp-share-btn" onclick="whatsappShare()"><i class="fab fa-whatsapp"></i></button>
     </div>
-</div>
 
-<div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 15px auto; width: 94%;">
-    <div id="sharePreview">Select a channel...</div>
-    <button class="copy-btn" id="copyBtn" onclick="copyShareMessage()">COPY</button>
-    <button class="wp-share-btn" onclick="whatsappShare()"><i class="fab fa-whatsapp"></i></button>
-</div>
-
-<div class="social-container">
-    <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn-base join-wp"><i class="fab fa-whatsapp"></i> Join WhatsApp Channel</a>
-    <a href="https://t.me/TheCricketLIVEOfficial" target="_blank" class="join-btn-base join-tg"><i class="fab fa-telegram"></i> Join Telegram Channel</a>
+    <div class="social-container">
+        <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn-base join-wp"><i class="fab fa-whatsapp"></i> Join WhatsApp Channel</a>
+        <a href="https://t.me/TheCricketLIVEOfficial" target="_blank" class="join-btn-base join-tg"><i class="fab fa-telegram"></i> Join Telegram Channel</a>
+    </div>
 </div>
 
 <script>
@@ -199,7 +200,6 @@
         'prime_event': 'https://paste.fledding.com/~Prime.html',
         'ss2hd': 'https://insiderlivehd.pages.dev/Fox',
         'willow': 'https://paste.fledding.com/~Willow.html',
-        
         'ww_ss1_sd_hindi': 'https://allinonereborn-jiotv.pages.dev/player_world?id=148',
         'ww_ss1_hd_hindi': 'https://allinonereborn-jiotv.pages.dev/player_world?id=174',
         'ww_ss1_sd': 'https://allinonereborn-jiotv.pages.dev/player_world?id=1142',
@@ -208,7 +208,6 @@
         'ww_ss2_hd_hindi': 'https://allinonereborn-jiotv.pages.dev/player_world?id=1984',
         'ww_ss2_sd': 'https://allinonereborn-jiotv.pages.dev/player_world?id=1141',
         'ww_ss2_hd': 'https://allinonereborn-jiotv.pages.dev/player_world?id=4456',
-
         'jio_astro_cricket': 'https://allinonereborn.online/airteltv-web/player.html?url=https%3A%2F%2Fallinonereborn.online%2Fairteltv-web%2Flive3.php%3Fid%3D1163988',
         'jio_ss1_hd_hindi': 'https://allinonereborn-jiotv.pages.dev/player.html?id=174',
         'jio_ss1_telugu': 'https://allinonereborn-jiotv.pages.dev/player.html?id=4471',
@@ -252,12 +251,18 @@
         
         container.innerHTML = `<iframe id="main-player" ${cropClass} src="${channels[slug]}" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" allow="autoplay; encrypted-media; fullscreen" scrolling="no" loading="lazy" onload="hideSkeleton()"></iframe>`;
         
-        if(popupClosed) showUIParts();
-        document.getElementById('watermark').style.display = 'inline-block';
+        // Share and UI Visibility Logic
+        const params = new URLSearchParams(window.location.search);
+        if(!params.get('ch')) {
+            if(popupClosed) showUIParts();
+        } else {
+            // If in Share Mode, always show these two
+            document.getElementById('live-signal-box').style.display = 'flex';
+            document.getElementById('reaction-bar').style.display = 'flex';
+        }
         
-        // SHORT URL LOGIC
-        const shortUrl = window.location.origin + "/?ch=" + slug;
-        document.getElementById('sharePreview').innerText = shortUrl;
+        document.getElementById('watermark').style.display = 'inline-block';
+        document.getElementById('sharePreview').innerText = window.location.origin + window.location.pathname + "?ch=" + slug;
     }
 
     function hideSkeleton() { document.getElementById('loading-skeleton').style.display = 'none'; }
@@ -276,12 +281,15 @@
     function copyShareMessage() { const linkText = document.getElementById('sharePreview').innerText; navigator.clipboard.writeText(linkText); document.getElementById('copyBtn').innerText = "DONE!"; setTimeout(() => { document.getElementById('copyBtn').innerText = "COPY"; }, 2000); }
     function whatsappShare() { const linkText = document.getElementById('sharePreview').innerText; window.open("https://api.whatsapp.com/send?text=" + linkText, '_blank'); }
 
+    // SHARE MODE LOGIC
     window.onload = function() {
         const params = new URLSearchParams(window.location.search);
         const ch = params.get('ch');
         if (ch && channels[ch]) {
             loadMatch(ch);
-            document.getElementById('site-header').classList.add('hidden-mode');
+            // Hide everything except player and reactions
+            document.getElementById('full-site-content').classList.add('hidden-mode');
+            document.getElementById('main-ui-controls').classList.add('hidden-mode');
             document.getElementById('share-header').style.display = 'block';
         }
     }
