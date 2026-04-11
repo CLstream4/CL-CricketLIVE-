@@ -48,7 +48,7 @@
             width: 100% !important;
             top: -22% !important; 
             transform: scale(1) !important;
-            pointer-events: auto !important; /* Ensures clicks pass through correctly */
+            pointer-events: auto !important;
         }
 
         .jio-hotstar-crop {
@@ -188,7 +188,8 @@
         'sony_ten_3': 'https://sportseera1.pages.dev/SportsEera/jiotv/jioplay?id=3372',
         'in_ss2_hd_hindi': 'https://tvgotk.wapka.fun/index.html',
         'hotstar_hindi': 'https://matcheslinkz.pages.dev/hindi',
-        'in_ss1_hd_hindi': 'https://waptv.pages.dev/?id=174',
+        // New URL added below
+        'in_ss1_hd_hindi': 'https://copy-karna-chor-da-bhai.pages.dev/OLDSTAR/?id=Hindi-Chud-1',
         'in_ss1_sd_hindi': 'https://waptv.pages.dev/?id=148',
         'prime_live': 'https://apiok.pages.dev/?id=4470',
         'willow': 'https://khel-box.github.io/Wlo',
@@ -240,7 +241,6 @@
             cropClass = 'style="height: 100%; width: 100%;"';
         }
 
-        // Added allow-fullscreen and optimized loading for smoothness
         container.innerHTML = `<iframe id="main-player" ${cropClass} src="${channels[slug]}" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-top-navigation" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" scrolling="no" loading="lazy" fetchpriority="high" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" onload="hideSkeleton()"></iframe>`;
         
         if(popupClosed) showUIParts();
