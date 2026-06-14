@@ -16,14 +16,38 @@
             background-color: #080c14;
             color: #ffffff;
             display: flex;
+            flex-direction: column;
             height: 100vh;
             overflow: hidden;
+        }
+
+        /* 👑 Premium Top Header & Brand Name */
+        .top-header {
+            width: 100%;
+            background-color: #0f172a;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 2px solid #1e293b;
+            z-index: 100;
+        }
+
+        .brand-name {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            /* Light Blue and Light Pink Mixture Gradient */
+            background: linear-gradient(135deg, #38bdf8 0%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
         }
 
         .container {
             display: flex;
             width: 100%;
-            height: 100%;
+            height: calc(100% - 56px); /* Header minus karke height adjustments */
         }
 
         /* Sidebar Styling */
@@ -39,6 +63,19 @@
             transition: all 0.3s ease;
         }
 
+        /* Share mode active hone par sidebar ko hide karne ka premium rule */
+        body.share-mode-active .sidebar, 
+        body.share-mode-active .top-header {
+            display: none !important;
+        }
+        body.share-mode-active .container {
+            height: 100vh !important;
+        }
+        body.share-mode-active .player-area {
+            width: 100% !important;
+            height: 100vh !important;
+        }
+
         .sidebar h2 {
             font-size: 1.1rem;
             margin-bottom: 15px;
@@ -48,6 +85,14 @@
             border-bottom: 2px solid #1e293b;
             padding-bottom: 10px;
             text-align: center;
+        }
+
+        /* Channel Row Container for Button + Copy */
+        .channel-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            width: 100%;
         }
 
         .channel-btn {
@@ -61,6 +106,7 @@
             font-size: 0.95rem;
             font-weight: 600;
             transition: all 0.2s ease;
+            flex-grow: 1;
         }
 
         .channel-btn:hover {
@@ -74,6 +120,26 @@
             box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
         }
 
+        /* Premium Copy Button */
+        .copy-btn {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            color: #38bdf8;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .copy-btn:hover {
+            background-color: #0284c7;
+            color: white;
+            border-color: #0ea5e9;
+        }
+
         /* Video Area */
         .player-area {
             width: 78%;
@@ -83,6 +149,7 @@
             align-items: center;
             padding: 20px;
             position: relative;
+            transition: all 0.3s ease;
         }
 
         /* SMART CROP BOX */
@@ -146,10 +213,93 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        /* 📱 MOBILE VIEW OPTIMIZATION (Fixed exact patti issue) */
+        /* 📱 Premium WhatsApp Popup Styling */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+        .popup-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .popup-box {
+            background: #0f172a;
+            border: 2px solid #1e293b;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(2, 132, 199, 0.3);
+            transform: scale(0.8);
+            transition: all 0.4s ease;
+        }
+        .popup-overlay.show .popup-box {
+            transform: scale(1);
+        }
+        .popup-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .popup-box h3 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+        .popup-box p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .popup-btn {
+            background: #25d366; /* WhatsApp Green */
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.2s ease;
+        }
+        .popup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+        .close-popup-text {
+            display: block;
+            margin-top: 15px;
+            color: #64748b;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* 📱 MOBILE VIEW OPTIMIZATION */
         @media (max-width: 768px) {
+            .brand-name {
+                font-size: 1.3rem;
+            }
             .container {
                 flex-direction: column-reverse;
+                height: calc(100% - 48px);
             }
             .sidebar {
                 width: 100%;
@@ -167,31 +317,64 @@
                 width: 100%;
             }
             
-            /* ADJUSTED MOBILE CROP: Normal screen par bhi blue box 100% andar daba diya */
             .video-wrapper iframe {
-                top: -34% !important;    /* Isse normal mode me bhi top patti gayab ho jayegi */
+                top: -34% !important;    
                 left: 0 !important;   
                 width: 100% !important;  
-                height: 134% !important; /* Height thodi badhai taaki controls upar khinch kar sahi jagah dikhein */
+                height: 134% !important; 
             }
             .video-wrapper.smart-fullscreen iframe {
                 top: -34% !important;
                 height: 134% !important;
+            }
+            body.share-mode-active .container {
+                height: 100vh !important;
+            }
+            body.share-mode-active .player-area {
+                height: 100vh !important;
             }
         }
     </style>
 </head>
 <body>
 
+    <div class="top-header">
+        <h1 class="brand-name">CricketLIVE! Official</h1>
+    </div>
+
     <div class="container">
         <div class="sidebar" id="sidebar-menu">
             <h2>⚡ LIVE MATCH</h2>
-            <button class="channel-btn active" onclick="changeChannel('https://allroundercrick.pages.dev/?id=fox-sports', this)">🦊 Fox Sports</button>
-            <button class="channel-btn" onclick="changeChannel('https://allroundercrick.pages.dev/?id=dsports', this)">🏏 D Sports</button>
-            <button class="channel-btn" onclick="changeChannel('https://allroundercrick.pages.dev/?id=zee-eng', this)">📺 Sporza Live</button>
-            <button class="channel-btn" onclick="changeChannel('https://allroundercrick.pages.dev/?id=tsn', this)">🏆 WC TV Live</button>
-            <button class="channel-btn" onclick="changeChannel('https://allroundercrick.pages.dev/?id=fussball', this)">⚽ Fussball</button>
-            <button class="channel-btn" onclick="changeChannel('https://allroundercrick.pages.dev/?id=telemundo', this)">🔥 EN Vivo</button>
+            
+            <div class="channel-row">
+                <button class="channel-btn active" id="btn-fox-sports" onclick="changeChannel('https://allroundercrick.pages.dev/?id=fox-sports', this, 'fox-sports')">🦊 Fox Sports</button>
+                <button class="copy-btn" onclick="copyShareLink('fox-sports')" title="Copy Premium Share Link">🔗</button>
+            </div>
+            
+            <div class="channel-row">
+                <button class="channel-btn" id="btn-dsports" onclick="changeChannel('https://allroundercrick.pages.dev/?id=dsports', this, 'dsports')">🏏 D Sports</button>
+                <button class="copy-btn" onclick="copyShareLink('dsports')" title="Copy Premium Share Link">🔗</button>
+            </div>
+
+            <div class="channel-row">
+                <button class="channel-btn" id="btn-zee-eng" onclick="changeChannel('https://allroundercrick.pages.dev/?id=zee-eng', this, 'zee-eng')">📺 Sporza Live</button>
+                <button class="copy-btn" onclick="copyShareLink('zee-eng')" title="Copy Premium Share Link">🔗</button>
+            </div>
+
+            <div class="channel-row">
+                <button class="channel-btn" id="btn-tsn" onclick="changeChannel('https://allroundercrick.pages.dev/?id=tsn', this, 'tsn')">🏆 WC TV Live</button>
+                <button class="copy-btn" onclick="copyShareLink('tsn')" title="Copy Premium Share Link">🔗</button>
+            </div>
+
+            <div class="channel-row">
+                <button class="channel-btn" id="btn-fussball" onclick="changeChannel('https://allroundercrick.pages.dev/?id=fussball', this, 'fussball')">⚽ Fussball</button>
+                <button class="copy-btn" onclick="copyShareLink('fussball')" title="Copy Premium Share Link">🔗</button>
+            </div>
+
+            <div class="channel-row">
+                <button class="channel-btn" id="btn-telemundo" onclick="changeChannel('https://allroundercrick.pages.dev/?id=telemundo', this, 'telemundo')">🔥 EN Vivo</button>
+                <button class="copy-btn" onclick="copyShareLink('telemundo')" title="Copy Premium Share Link">🔗</button>
+            </div>
         </div>
 
         <div class="player-area">
@@ -210,8 +393,54 @@
         </div>
     </div>
 
+    <div class="popup-overlay" id="whatsapp-popup">
+        <div class="popup-box">
+            <span class="popup-icon">📢</span>
+            <h3>Join Our WhatsApp Channel!</h3>
+            <p>Never miss a single match update! Follow our channel to get daily live stream link updates, schedules, and instant notifications directly on your WhatsApp.</p>
+            <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="popup-btn" onclick="closePopup()">
+                🟢 Follow Updates On WhatsApp
+            </a>
+            <span class="close-popup-text" onclick="closePopup()">Continue to Website</span>
+        </div>
+    </div>
+
     <script>
-        function changeChannel(videoUrl, buttonElement) {
+        // Mapping of channels for URLs and triggers
+        const channelsMap = {
+            'fox-sports': 'https://allroundercrick.pages.dev/?id=fox-sports',
+            'dsports': 'https://allroundercrick.pages.dev/?id=dsports',
+            'zee-eng': 'https://allroundercrick.pages.dev/?id=zee-eng',
+            'tsn': 'https://allroundercrick.pages.dev/?id=tsn',
+            'fussball': 'https://allroundercrick.pages.dev/?id=fussball',
+            'telemundo': 'https://allroundercrick.pages.dev/?id=telemundo'
+        };
+
+        // Page Load Engine to check Premium Share Mode and Show WhatsApp Popup
+        window.onload = function() {
+            // Show premium popup
+            setTimeout(() => {
+                document.getElementById('whatsapp-popup').classList.add('show');
+            }, 800);
+
+            // Check if user came via a shared stream link
+            const urlParams = new URLSearchParams(window.location.search);
+            const sharedStream = urlParams.get('stream');
+
+            if (sharedStream && channelsMap[sharedStream]) {
+                // Activate Premium Share Mode (Hide everything else)
+                document.body.classList.add('share-mode-active');
+                
+                // Load that specific stream
+                document.getElementById('live-player').src = channelsMap[sharedStream];
+            }
+        };
+
+        function closePopup() {
+            document.getElementById('whatsapp-popup').classList.remove('show');
+        }
+
+        function changeChannel(videoUrl, buttonElement, streamId) {
             document.getElementById('live-player').src = videoUrl;
 
             let buttons = document.getElementsByClassName('channel-btn');
@@ -219,6 +448,20 @@
                 buttons[i].classList.remove('active');
             }
             buttonElement.classList.add('active');
+        }
+
+        // 🔗 Premium Quality Link Generator & Copy Logic
+        function copyShareLink(streamId) {
+            // It automatically detects current deployment domain (Vercel or local)
+            const baseUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+            const finalShareUrl = `${baseUrl}?stream=${streamId}`;
+
+            // Copy to Clipboard
+            navigator.clipboard.writeText(finalShareUrl).then(() => {
+                alert('🚀 Premium Share Link Copied! Send it to anyone to watch directly.');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
         }
 
         function toggleSmartFullscreen() {
