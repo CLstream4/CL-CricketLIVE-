@@ -86,7 +86,7 @@
             <div class="video-container">
                 <iframe 
                     id="player" 
-                    src="https://cinearena.fun/chns/cignaltv" 
+                    src="https://tvgotk.wapka.site/?id=ss1" 
                     allow="autoplay; encrypted-media" 
                     sandbox="allow-scripts allow-same-origin allow-forms"
                     allowfullscreen>
@@ -112,13 +112,24 @@
         </div>
 
         <div class="channel-list">
-            <button class="channel-btn active" id="btn-cignal" onclick="loadCh('https://cinearena.fun/chns/cignaltv', 'cignal', this)">Cignal Tv</button>
-            <button class="channel-btn" id="btn-caze" onclick="loadCh('https://cinearena.fun/chns/cazetv', 'caze', this)">Caze Tv</button>
-            <button class="channel-btn" id="btn-ss_tel" onclick="loadCh('https://cinearena.fun/chns/telemundo', 'ss_tel', this)">Telemundo</button>
-            <button class="channel-btn" id="btn-zee" onclick="loadCh('https://cinearena.fun/chns/zee-bangla', 'zee', this)">Zee Bangla</button>
-            <button class="channel-btn" id="btn-m6" onclick="loadCh('https://cinearena.fun/chns/m6direct', 'm6', this)">M6 Direct</button>
-            <button class="channel-btn" id="btn-tipik" onclick="loadCh('https://cinearena.fun/chns/tipik', 'tipik', this)">Tipik Tv</button>
-            <button class="channel-btn" id="btn-dsports" onclick="loadCh('https://cinearena.fun/chns/dsports', 'dsports', this)">D Sports</button>
+            <button class="channel-btn active" onclick="loadCh('https://tvgotk.wapka.site/?id=ss1', 'ss1_sd', this)">SS 1 SD</button>
+            <button class="channel-btn" onclick="loadCh('https://jtvxweb.pages.dev/pind?id=1106', 'ss1_hd', this)">SS 1 HD</button>
+            <button class="channel-btn" onclick="loadCh('https://tvgotk.wapka.site/', 'ss1_sd_h', this)">SS 1 SD Hindi</button>
+            <button class="channel-btn" onclick="loadCh('https://jtvxweb.pages.dev/pind?id=1108', 'ss1_hd_h', this)">SS 1 HD Hindi</button>
+            <button class="channel-btn" onclick="loadCh('https://tvgotk.wapka.site/?id=ss2', 'ss2_sd', this)">SS 2 SD</button>
+            <button class="channel-btn" onclick="loadCh('https://jtvxweb.pages.dev/pind?id=1109', 'ss2_hd', this)">SS 2 HD</button>
+            <button class="channel-btn" onclick="loadCh('https://tvgotk.wapka.site/', 'ss2_sd_h', this)">SS 2 SD Hindi</button>
+            <button class="channel-btn" onclick="loadCh('https://tvgotk.wapka.site/home', 'ss2_hd_h', this)">SS 2 HD Hindi</button>
+            <button class="channel-btn" onclick="loadCh('https://jtvxweb.pages.dev/pind?id=3278', 'ss1_hd_t', this)">SS 1 HD Tamil</button>
+            <button class="channel-btn" onclick="loadCh('https://jtvxweb.pages.dev/pind?id=3273', 'ss2_hd_t', this)">SS 2 HD Tamil</button>
+            <button class="channel-btn" onclick="loadCh('https://jtvxweb.pages.dev/pind?id=3274', 'ss2_hd_tl', this)">SS 2 HD Telugu</button>
+            <button class="channel-btn" onclick="loadCh('https://tvgotk.wapka.site/?id=ss2kn', 'ss2_sd_k', this)">SS 2 SD Kannada</button>
+            <button class="channel-btn" onclick="loadCh('https://tvgotk.wapka.site/?id=sliv1', 'ten1_hd', this)">Sony Ten 1 HD</button>
+            <button class="channel-btn" onclick="loadCh('https://tvgotk.wapka.site/?id=sliv2', 'ten2_hd', this)">Sony Ten 2 HD</button>
+            <button class="channel-btn" onclick="loadCh('https://tvgotk.wapka.site/?id=sliv3', 'ten3_hd', this)">Sony Ten 3 HD</button>
+            <button class="channel-btn" onclick="loadCh('https://tnt1-cricstreaming.pages.dev/', 'tnt1', this)">TNT Sports 1</button>
+            <button class="channel-btn" onclick="loadCh('https://ollinone.pages.dev/tnt3', 'tnt3', this)">TNT Sports 3</button>
+            <button class="channel-btn" onclick="loadCh('https://khel-box.github.io/Wlo', 'willow', this)">Willow Sports</button>
         </div>
 
     </div>
@@ -140,21 +151,30 @@
 
     <script>
         const channelMap = {
-            'cignal': 'https://cinearena.fun/chns/cignaltv',
-            'caze': 'https://cinearena.fun/chns/cazetv',
-            'ss_tel': 'https://cinearena.fun/chns/telemundo',
-            'zee': 'https://cinearena.fun/chns/zee-bangla',
-            'm6': 'https://cinearena.fun/chns/m6direct',
-            'tipik': 'https://cinearena.fun/chns/tipik',
-            'dsports': 'https://cinearena.fun/chns/dsports'
+            'ss1_sd': 'https://tvgotk.wapka.site/?id=ss1',
+            'ss1_hd': 'https://jtvxweb.pages.dev/pind?id=1106',
+            'ss1_sd_h': 'https://tvgotk.wapka.site/',
+            'ss1_hd_h': 'https://jtvxweb.pages.dev/pind?id=1108',
+            'ss2_sd': 'https://tvgotk.wapka.site/?id=ss2',
+            'ss2_hd': 'https://jtvxweb.pages.dev/pind?id=1109',
+            'ss2_sd_h': 'https://tvgotk.wapka.site/',
+            'ss2_hd_h': 'https://tvgotk.wapka.site/home',
+            'ss1_hd_t': 'https://jtvxweb.pages.dev/pind?id=3278',
+            'ss2_hd_t': 'https://jtvxweb.pages.dev/pind?id=3273',
+            'ss2_hd_tl': 'https://jtvxweb.pages.dev/pind?id=3274',
+            'ss2_sd_k': 'https://tvgotk.wapka.site/?id=ss2kn',
+            'ten1_hd': 'https://tvgotk.wapka.site/?id=sliv1',
+            'ten2_hd': 'https://tvgotk.wapka.site/?id=sliv2',
+            'ten3_hd': 'https://tvgotk.wapka.site/?id=sliv3',
+            'tnt1': 'https://tnt1-cricstreaming.pages.dev/',
+            'tnt3': 'https://ollinone.pages.dev/tnt3',
+            'willow': 'https://khel-box.github.io/Wlo'
         };
 
-        let activeId = 'cignal';
+        let activeId = 'ss1_sd';
 
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('popup').classList.add('show');
-            
-            // Dynamic check if router matches current shared identifier setup
             const params = new URLSearchParams(window.location.search);
             if(params.has('share')) {
                 const targetId = params.get('share');
@@ -175,19 +195,14 @@
             const player = document.getElementById('player');
             player.src = '';
             setTimeout(() => { player.src = url; }, 50);
-            
             document.querySelectorAll('.channel-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            if(btn) btn.classList.add('active');
         }
 
         function copyLink() {
-            // Dynamically catches the exact current working host domain (e.g. mktv.pages.dev)
             const cleanShareUrl = window.location.origin + window.location.pathname + '?share=' + activeId;
-            
             navigator.clipboard.writeText(cleanShareUrl).then(() => {
-                alert(' Copied Clean Dynamic Share Link: ' + cleanShareUrl);
-            }).catch(err => {
-                console.error('Copy failed: ', err);
+                alert('Link copied: ' + cleanShareUrl);
             });
         }
     </script>
