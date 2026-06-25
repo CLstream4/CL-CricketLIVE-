@@ -2,12 +2,12 @@
 <html>
 <body>
 
-  <h3>Real Byte File Generator</h3>
+  <h3>Real Byte File Generator (For Game)</h3>
   <input type="file" id="fileInput">
-  <button onclick="convertToRealBytes()">Generate Real Bytes</button>
+  <button onclick="generateGameFile()">Generate .bytes File</button>
 
   <script>
-    async function convertToRealBytes() {
+    function generateGameFile() {
       const fileInput = document.getElementById('fileInput');
       const file = fileInput.files[0];
 
@@ -16,28 +16,31 @@
         return;
       }
 
-      // 1. File ko ArrayBuffer (Binary) mein read karo
-      const arrayBuffer = await file.arrayBuffer();
-      
-      // 2. Uint8Array mein convert karo (Yeh real bytes hote hain)
-      const uint8View = new Uint8Array(arrayBuffer);
-      
-      // 3. Blob create karo "application/octet-stream" type ke saath
-      // Isse file ka internal structure 'raw stream' ban jayega
-      const blob = new Blob([uint8View], {type: "application/octet-stream"});
-      
-      // 4. Download trigger karo
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      
-      // Name set karo
-      const name = file.name.split('.')[0];
-      a.download = name + ".bytes";
-      
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        // Yeh line file ke har byte ko as-is read karti hai
+        const arrayBuffer = e.target.result;
+        
+        // Blob ko direct buffer se banaya gaya hai (No encoding change)
+        const blob = new Blob([new Uint8Array(arrayBuffer)], {type: "application/octet-stream"});
+        
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        
+        // File ka extension .bytes rakha hai
+        const name = file.name.split('.')[0];
+        a.download = name + ".bytes";
+        
+        a.href = url;
+        a.click();
+        
+        URL.revokeObjectURL(url);
+        alert("File generate ho gayi! Ise game ke folder mein copy karo.");
+      };
+
+      // Raw ArrayBuffer mein load karna zaruri hai
+      reader.readAsArrayBuffer(file);
     }
   </script>
 
