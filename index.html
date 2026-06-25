@@ -1,48 +1,38 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-  <h3>Real Byte File Generator (For Game)</h3>
+  <h3>Game Byte Generator (Direct Buffer Mode)</h3>
   <input type="file" id="fileInput">
-  <button onclick="generateGameFile()">Generate .bytes File</button>
+  <button onclick="generateGameBytes()">Generate Raw Bytes File</button>
 
   <script>
-    function generateGameFile() {
+    function generateGameBytes() {
       const fileInput = document.getElementById('fileInput');
       const file = fileInput.files[0];
-
-      if (!file) {
-        alert("Pehle image select karo!");
-        return;
-      }
+      if (!file) return alert("Select file!");
 
       const reader = new FileReader();
-
       reader.onload = function(e) {
-        // Yeh line file ke har byte ko as-is read karti hai
         const arrayBuffer = e.target.result;
         
-        // Blob ko direct buffer se banaya gaya hai (No encoding change)
-        const blob = new Blob([new Uint8Array(arrayBuffer)], {type: "application/octet-stream"});
+        // Yahan hum file ke pure data ko "Uint8Array" mein le rahe hain
+        // Yeh computer ke liye exact "Raw Binary" hai
+        const uint8 = new Uint8Array(arrayBuffer);
+        
+        // Blob create karo bina kisi type define kiye, 
+        // taaki browser isme koi metadata ya header na add kare
+        const blob = new Blob([uint8]); 
         
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         
-        // File ka extension .bytes rakha hai
-        const name = file.name.split('.')[0];
-        a.download = name + ".bytes";
-        
+        // Naam wahi rakho jo game mangta hai
+        a.download = file.name.split('.')[0] + ".bytes";
         a.href = url;
         a.click();
-        
-        URL.revokeObjectURL(url);
-        alert("File generate ho gayi! Ise game ke folder mein copy karo.");
       };
-
-      // Raw ArrayBuffer mein load karna zaruri hai
       reader.readAsArrayBuffer(file);
     }
   </script>
-
 </body>
 </html>
