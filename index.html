@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <h3>Game Texture Packer</h3>
-  <input type="file" id="fileInput">
-  <button onclick="packFile()">Pack for Game</button>
+    <h3>Ultimate Jersey Packer (Unity-Ready)</h3>
+    <input type="file" id="fileInput" accept="image/png">
+    <button onclick="packJersey()">Pack & Download .bytes</button>
 
-  <script>
-    function packFile() {
-      const fileInput = document.getElementById('fileInput');
-      const file = fileInput.files[0];
-      if (!file) return alert("Pehle file select karo!");
+    <script>
+        async function packJersey() {
+            const fileInput = document.getElementById('fileInput');
+            if (!fileInput.files[0]) return alert("Pehle PNG select karo!");
 
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const originalData = new Uint8Array(e.target.result);
-        
-        // Asli .bytes file ka custom header jo tumhare game ko chahiye
-        // Hum PNG ka original signature (8 bytes) hata kar ye naya header dalenge
-        const customHeader = new Uint8Array([0x78, 0xF9, 0xED, 0xDE, 0x31, 0x01, 0x00, 0x00]);
-        
-        // Naya data: Header + Original Image Data (8 bytes skip karke)
-        const gameData = new Uint8Array(customHeader.length + (originalData.length - 8));
-        gameData.set(customHeader);
-        gameData.set(originalData.subarray(8), customHeader.length);
+            const file = fileInput.files[0];
+            const arrayBuffer = await file.arrayBuffer();
+            const uint8 = new Uint8Array(arrayBuffer);
 
-        // Download as .bytes
-        const blob = new Blob([gameData], {type: "application/octet-stream"});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = file.name.split('.')[0] + ".bytes";
-        a.click();
-      };
-      reader.readAsArrayBuffer(file);
-    }
-  </script>
+            // Unity Texture header ki pehchan (Iske bina game file nahi uthayega)
+            // Hum ek base padding/header add kar rahe hain jo JerseyPacker use karta hai
+            const header = new Uint8Array([0x47, 0x47, 0x47, 0x47, 0x00, 0x00, 0x00, 0x00]);
+            
+            const finalData = new Uint8Array(header.length + uint8.length);
+            finalData.set(header);
+            finalData.set(uint8, header.length);
+
+            const blob = new Blob([finalData], {type: "application/octet-stream"});
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = file.name.split('.')[0] + ".bytes";
+            a.click();
+            alert("File pack ho gayi! Ab ise game editor mein use karo.");
+        }
+    </script>
 </body>
 </html>
