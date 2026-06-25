@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <h3>Ultimate Jersey Packer (Unity-Ready)</h3>
+    <h3>Ultimate Jersey Packer (Raw Pixel Mode)</h3>
     <input type="file" id="fileInput" accept="image/png">
-    <button onclick="packJersey()">Pack & Download .bytes</button>
+    <button onclick="packJersey()">Pack As Raw Pixels</button>
+
+    <canvas id="myCanvas" style="display:none;"></canvas>
 
     <script>
         async function packJersey() {
-            const fileInput = document.getElementById('fileInput');
-            if (!fileInput.files[0]) return alert("Pehle PNG select karo!");
-
-            const file = fileInput.files[0];
-            const arrayBuffer = await file.arrayBuffer();
-            const uint8 = new Uint8Array(arrayBuffer);
-
-            // Unity Texture header ki pehchan (Iske bina game file nahi uthayega)
-            // Hum ek base padding/header add kar rahe hain jo JerseyPacker use karta hai
-            const header = new Uint8Array([0x47, 0x47, 0x47, 0x47, 0x00, 0x00, 0x00, 0x00]);
+            const file = document.getElementById('fileInput').files[0];
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
             
-            const finalData = new Uint8Array(header.length + uint8.length);
-            finalData.set(header);
-            finalData.set(uint8, header.length);
+            img.onload = function() {
+                const canvas = document.getElementById('myCanvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                
+                // Image ke pixels ko extract karo (RGBA format)
+                const imageData = ctx.getImageData(0, 0, img.width, img.height);
+                const rawBytes = new Uint8Array(imageData.data.buffer);
 
-            const blob = new Blob([finalData], {type: "application/octet-stream"});
-            const url = URL.createObjectURL(blob);
-            
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = file.name.split('.')[0] + ".bytes";
-            a.click();
-            alert("File pack ho gayi! Ab ise game editor mein use karo.");
+                // File ko pack karo
+                const blob = new Blob([rawBytes], {type: "application/octet-stream"});
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = file.name.split('.')[0] + ".bytes";
+                a.click();
+            };
         }
     </script>
 </body>
