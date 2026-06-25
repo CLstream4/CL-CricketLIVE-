@@ -2,17 +2,17 @@
 <html>
 <body>
 
-  <h3>PNG to Raw Bytes File Converter</h3>
+  <h3>PNG/JPG to .bytes File Converter</h3>
   <input type="file" id="fileInput">
-  <button onclick="downloadAsBytes()">Convert & Download as Bytes</button>
+  <button onclick="convertToBytes()">Convert & Download as .bytes</button>
 
   <script>
-    function downloadAsBytes() {
+    function convertToBytes() {
       const fileInput = document.getElementById('fileInput');
       const file = fileInput.files[0];
 
       if (!file) {
-        alert("Pehle file select karo!");
+        alert("Pehle image select karo!");
         return;
       }
 
@@ -21,23 +21,24 @@
       reader.onload = function(e) {
         const arrayBuffer = e.target.result;
         
-        // "application/octet-stream" ka matlab hai "Raw Binary Data"
+        // Raw binary data
         const blob = new Blob([arrayBuffer], {type: "application/octet-stream"});
-        
         const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
         
-        // File ka extension hum .bin hi rakhenge kyunki game ko "bytes" chahiye
-        // Agar game ko sirf file ka naam chahiye, toh hum extension .bin hi force karenge
+        const a = document.createElement('a');
         a.href = url;
-        a.download = file.name.split('.')[0] + ".bin"; 
+        
+        // Yahan maine extension ko ".bytes" force kar diya hai
+        const originalName = file.name.split('.')[0]; 
+        a.download = originalName + ".bytes"; 
         
         document.body.appendChild(a);
         a.click();
         
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        alert("File ready hai! Check karo kya ab game ise accept kar raha hai.");
+        
+        alert("Done! File '" + originalName + ".bytes' download ho gayi hai.");
       };
 
       reader.readAsArrayBuffer(file);
