@@ -2,17 +2,17 @@
 <html>
 <body>
 
-  <h3>Image to Original Bytes Converter</h3>
+  <h3>PNG to Raw Bytes File Converter</h3>
   <input type="file" id="fileInput">
-  <button onclick="convertAndDownload()">Convert & Download</button>
+  <button onclick="downloadAsBytes()">Convert & Download as Bytes</button>
 
   <script>
-    function convertAndDownload() {
+    function downloadAsBytes() {
       const fileInput = document.getElementById('fileInput');
       const file = fileInput.files[0];
 
       if (!file) {
-        alert("Pehle image select karo!");
+        alert("Pehle file select karo!");
         return;
       }
 
@@ -21,22 +21,23 @@
       reader.onload = function(e) {
         const arrayBuffer = e.target.result;
         
-        // Bina kisi type ke, sirf raw bytes
-        const blob = new Blob([arrayBuffer]); 
+        // "application/octet-stream" ka matlab hai "Raw Binary Data"
+        const blob = new Blob([arrayBuffer], {type: "application/octet-stream"});
+        
         const url = URL.createObjectURL(blob);
-        
         const a = document.createElement('a');
-        a.href = url;
         
-        // Yahan file ka wahi naam rahega jo aapne upload kiya hai
-        a.download = file.name; 
+        // File ka extension hum .bin hi rakhenge kyunki game ko "bytes" chahiye
+        // Agar game ko sirf file ka naam chahiye, toh hum extension .bin hi force karenge
+        a.href = url;
+        a.download = file.name.split('.')[0] + ".bin"; 
         
         document.body.appendChild(a);
         a.click();
         
-        // Memory saaf karne ke liye
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+        alert("File ready hai! Check karo kya ab game ise accept kar raha hai.");
       };
 
       reader.readAsArrayBuffer(file);
