@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Image to Game Bytes</title>
-</head>
 <body>
 
-  <h2>Image to Bytes Converter</h2>
-  
+  <h3>Image to Original Bytes Converter</h3>
   <input type="file" id="fileInput">
-  <br><br>
-  
-  <button onclick="convertAndDownload()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
-    Convert & Download
-  </button>
-  
-  <p id="status"></p>
+  <button onclick="convertAndDownload()">Convert & Download</button>
 
   <script>
     function convertAndDownload() {
@@ -22,32 +12,33 @@
       const file = fileInput.files[0];
 
       if (!file) {
-        alert("Pehle koi image file select karo!");
+        alert("Pehle image select karo!");
         return;
       }
 
       const reader = new FileReader();
       
       reader.onload = function(e) {
-        // Raw binary data
         const arrayBuffer = e.target.result;
         
-        // Blob banana taaki download ho sake
-        const blob = new Blob([arrayBuffer], {type: "application/octet-stream"});
+        // Bina kisi type ke, sirf raw bytes
+        const blob = new Blob([arrayBuffer]); 
         const url = URL.createObjectURL(blob);
         
-        // Download trigger karna
         const a = document.createElement('a');
         a.href = url;
-        // Yahan file ka extension badal sakte ho agar game ko alag chahiye (jaise .dat ya .bin)
-        a.download = "game_file.bin"; 
+        
+        // Yahan file ka wahi naam rahega jo aapne upload kiya hai
+        a.download = file.name; 
+        
         document.body.appendChild(a);
         a.click();
         
-        document.getElementById('status').textContent = "Convert ho gaya! File download ho rahi hai...";
+        // Memory saaf karne ke liye
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
       };
 
-      // File ko raw bytes mein read karna
       reader.readAsArrayBuffer(file);
     }
   </script>
