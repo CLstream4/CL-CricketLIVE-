@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <h3>Game Byte Generator (Direct Buffer Mode)</h3>
+  <h3>Game Texture Packer</h3>
   <input type="file" id="fileInput">
-  <button onclick="generateGameBytes()">Generate Raw Bytes File</button>
+  <button onclick="packFile()">Pack for Game</button>
 
   <script>
-    function generateGameBytes() {
+    function packFile() {
       const fileInput = document.getElementById('fileInput');
       const file = fileInput.files[0];
-      if (!file) return alert("Select file!");
+      if (!file) return alert("Pehle file select karo!");
 
       const reader = new FileReader();
       reader.onload = function(e) {
-        const arrayBuffer = e.target.result;
+        const originalData = new Uint8Array(e.target.result);
         
-        // Yahan hum file ke pure data ko "Uint8Array" mein le rahe hain
-        // Yeh computer ke liye exact "Raw Binary" hai
-        const uint8 = new Uint8Array(arrayBuffer);
+        // Asli .bytes file ka custom header jo tumhare game ko chahiye
+        // Hum PNG ka original signature (8 bytes) hata kar ye naya header dalenge
+        const customHeader = new Uint8Array([0x78, 0xF9, 0xED, 0xDE, 0x31, 0x01, 0x00, 0x00]);
         
-        // Blob create karo bina kisi type define kiye, 
-        // taaki browser isme koi metadata ya header na add kare
-        const blob = new Blob([uint8]); 
-        
+        // Naya data: Header + Original Image Data (8 bytes skip karke)
+        const gameData = new Uint8Array(customHeader.length + (originalData.length - 8));
+        gameData.set(customHeader);
+        gameData.set(originalData.subarray(8), customHeader.length);
+
+        // Download as .bytes
+        const blob = new Blob([gameData], {type: "application/octet-stream"});
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        
-        // Naam wahi rakho jo game mangta hai
-        a.download = file.name.split('.')[0] + ".bytes";
         a.href = url;
+        a.download = file.name.split('.')[0] + ".bytes";
         a.click();
       };
       reader.readAsArrayBuffer(file);
