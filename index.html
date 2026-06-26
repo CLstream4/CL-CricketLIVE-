@@ -79,7 +79,7 @@
         .join-wp { background: rgba(37, 211, 102, 0.2); border: 1px solid #25D366; }
         .join-tg { background: rgba(0, 136, 204, 0.2); border: 1px solid #0088cc; }
 
-        .hidden-mode { display: none !important; }
+        .hide-on-share { display: none !important; }
     </style>
 </head>
 <body>
@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<div class="floating-sidebar">
+<div class="floating-sidebar hide-on-share-permanent">
     <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="sidebar-icon sidebar-wp"><i class="fab fa-whatsapp"></i></a>
     <a href="https://t.me/TheCricketLIVEOfficial" target="_blank" class="sidebar-icon sidebar-tg"><i class="fab fa-telegram"></i></a>
 </div>
@@ -119,7 +119,7 @@
     <div class="react-btn" onclick="react('&#128079;')">&#128079;</div>
 </div>
 
-<div id="main-grid">
+<div id="main-grid" class="hide-on-share-permanent">
     <div class="section-title">LIVE CHANNELS</div>
     <div class="channel-grid">
         <button class="channel-button cricbuzz-btn" data-slug="cricbuzz_1" onclick="loadMatch('cricbuzz_1')">CRICBUZZ 1</button>
@@ -136,11 +136,9 @@
         <button class="channel-button ptv-btn" data-slug="sky_sports_2" onclick="loadMatch('sky_sports_2')">Sky Sports 2</button>
         <button class="channel-button sony-btn" data-slug="euro_sports_hd" onclick="loadMatch('euro_sports_hd')">Euro Sports HD</button>
         <button class="channel-button" data-slug="fox_501" style="background: linear-gradient(45deg, #111, #333); border: 1px solid #ffaa00;" onclick="loadMatch('fox_501')">FOX SPORTS 501</button>
-        
         <button class="channel-button sony-btn" data-slug="sony_sports_1_hd" onclick="loadMatch('sony_sports_1_hd')">Sony Sports 1 HD</button>
         <button class="channel-button sony-btn" data-slug="sony_sports_4_hindi" onclick="loadMatch('sony_sports_4_hindi')">Sony Sports 4 Hindi</button>
         <button class="channel-button sony-btn" data-slug="sony_sports_5" onclick="loadMatch('sony_sports_5')">Sony Sports 5</button>
-        
         <button class="channel-button" data-slug="tnt_sports_2" onclick="loadMatch('tnt_sports_2')">TNT Sports 2</button>
         <button class="channel-button" data-slug="fancode" onclick="loadMatch('fancode')">FanCode</button>
         <button class="channel-button sony-btn" data-slug="sony_liv" onclick="loadMatch('sony_liv')">Sony LIV</button>
@@ -149,13 +147,13 @@
     </div>
 </div>
 
-<div style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 15px auto; width: 94%;">
+<div class="hide-on-share-permanent" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 15px auto; width: 94%;">
     <div id="sharePreview">Select a channel...</div>
     <button class="copy-btn" id="copyBtn" onclick="copyShareMessage()">COPY</button>
     <button class="wp-share-btn" onclick="whatsappShare()"><i class="fab fa-whatsapp"></i></button>
 </div>
 
-<div class="social-container">
+<div class="social-container hide-on-share-permanent">
     <a href="https://whatsapp.com/channel/0029Vb9sfuABA1eqJmiFc91q" target="_blank" class="join-btn-base join-wp"><i class="fab fa-whatsapp"></i> Join WhatsApp Channel</a>
     <a href="https://t.me/TheCricketLIVEOfficial" target="_blank" class="join-btn-base join-tg"><i class="fab fa-telegram"></i> Join Telegram Channel</a>
 </div>
@@ -176,12 +174,9 @@
         'sky_sports_2': 'https://allrounder-live5.pages.dev/channel/ptv',
         'euro_sports_hd': 'https://allinonereborn.online/tplay/play.php?id=812',
         'fox_501': 'https://ollinone.pages.dev/fox',
-        
-        // UPDATED/NEW LINKS
         'sony_sports_1_hd': 'https://tvwap.pages.dev/?id=english',
         'sony_sports_4_hindi': 'https://tvwap.pages.dev/?id=hindi',
         'sony_sports_5': 'https://tvwap.pages.dev/?id=s5',
-        
         'tnt_sports_2': 'https://ollinone.pages.dev/tnt2',
         'fancode': 'https://ollinone.pages.dev/fc',
         'sony_liv': 'https://tvgotk.wapka.site/?id=sliv1',
@@ -194,44 +189,28 @@
 
     function loadMatch(slug) {
         if (!channels[slug]) return;
-        
         currentChannel = slug;
         const container = document.getElementById('player-container');
         document.getElementById('loading-skeleton').style.display = 'block';
-        
         document.querySelectorAll('.channel-button').forEach(btn => btn.classList.remove('active-channel'));
         const targetBtn = document.querySelector(`[data-slug="${slug}"]`);
         if (targetBtn) {
             targetBtn.classList.add('active-channel');
             document.title = `🔴 LIVE: ${targetBtn.innerText} | CRICKETLIVE!`;
         }
-        
         let customClass = (slug === 'willow_ios') ? 'class="zoom-ios"' : '';
         const sandboxAttr = 'sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-top-navigation allow-popups"';
-        
         container.innerHTML = `<iframe id="main-player" ${customClass} src="${channels[slug]}" ${sandboxAttr} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" scrolling="no" loading="lazy" onload="hideSkeleton()"></iframe>`;
-        
         setTimeout(() => { hideSkeleton(); }, 4000);
-
         if (popupClosed) showUIParts();
         document.getElementById('watermark').style.display = 'inline-block';
         document.getElementById('sharePreview').innerText = `${window.location.origin}${window.location.pathname}?ch=${slug}`;
     }
 
-    function refreshPlayer() {
-        if (currentChannel) {
-            loadMatch(currentChannel);
-        }
-    }
-
+    function refreshPlayer() { if (currentChannel) loadMatch(currentChannel); }
     function hideSkeleton() { document.getElementById('loading-skeleton').style.display = 'none'; }
     function showUIParts() { if (currentChannel && popupClosed) { document.getElementById('live-signal-box').style.display = 'flex'; document.getElementById('reaction-bar').style.display = 'flex'; } }
-    
-    function closePopup() { 
-        document.getElementById('entry-popup').style.display = 'none'; 
-        popupClosed = true; 
-        showUIParts(); 
-    }
+    function closePopup() { document.getElementById('entry-popup').style.display = 'none'; popupClosed = true; showUIParts(); }
     
     function react(emoji) { const el = document.createElement('div'); el.className = 'floating-emoji'; el.innerHTML = emoji; el.style.left = `${Math.random() * 60 + 20}%`; document.body.appendChild(el); setTimeout(() => el.remove(), 2000); }
     function copyShareMessage() { const linkText = document.getElementById('sharePreview').innerText; navigator.clipboard.writeText(linkText); document.getElementById('copyBtn').innerText = "DONE!"; setTimeout(() => { document.getElementById('copyBtn').innerText = "COPY"; }, 2000); }
@@ -240,6 +219,8 @@
     window.onload = function() {
         const ch = new URLSearchParams(window.location.search).get('ch');
         if (ch && channels[ch]) {
+            // "Share Mode" enabled: hide non-essential elements
+            document.querySelectorAll('.hide-on-share-permanent').forEach(el => el.style.display = 'none');
             closePopup();
             loadMatch(ch);
         }
