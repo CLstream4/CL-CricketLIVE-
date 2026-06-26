@@ -79,7 +79,7 @@
         .join-wp { background: rgba(37, 211, 102, 0.2); border: 1px solid #25D366; }
         .join-tg { background: rgba(0, 136, 204, 0.2); border: 1px solid #0088cc; }
 
-        .hide-on-share { display: none !important; }
+        .hide-on-share-permanent { display: block; }
     </style>
 </head>
 <body>
@@ -199,8 +199,11 @@
             document.title = `🔴 LIVE: ${targetBtn.innerText} | CRICKETLIVE!`;
         }
         let customClass = (slug === 'willow_ios') ? 'class="zoom-ios"' : '';
-        const sandboxAttr = 'sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-top-navigation allow-popups"';
+        // Updated sandbox attributes to prevent external redirection
+        const sandboxAttr = 'sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"';
+        
         container.innerHTML = `<iframe id="main-player" ${customClass} src="${channels[slug]}" ${sandboxAttr} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" scrolling="no" loading="lazy" onload="hideSkeleton()"></iframe>`;
+        
         setTimeout(() => { hideSkeleton(); }, 4000);
         if (popupClosed) showUIParts();
         document.getElementById('watermark').style.display = 'inline-block';
@@ -221,8 +224,11 @@
         if (ch && channels[ch]) {
             // "Share Mode" enabled: hide non-essential elements
             document.querySelectorAll('.hide-on-share-permanent').forEach(el => el.style.display = 'none');
-            closePopup();
+            // Popup remains to be closed manually by user
             loadMatch(ch);
+        } else {
+            // Standard loading
+            document.getElementById('entry-popup').style.display = 'flex';
         }
     };
 </script>
