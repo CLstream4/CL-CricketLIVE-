@@ -163,19 +163,19 @@
         'cricbuzz_1': 'https://allinonereborn.online/mpd/tnt1.html',
         'willow': 'https://khel-box.github.io/Wlo',
         'willow_ios': 'https://allinone-reborn.pages.dev/willo-ios',
-        'ss1_hd': 'https://jtvxweb.pages.dev/pind?id=1106',
-        'ss1_hd_hindi': 'https://jtvxweb.pages.dev/pind?id=1108',
+        'ss1_hd': 'https://shwe7ank-jeeyo.netlify.app/watch.html?id=ss1',
+        'ss1_hd_hindi': 'https://shwe7ank-jeeyo.netlify.app/watch.html?id=ss1h',
         'ss1_hd_tamil': 'https://jtvxweb.pages.dev/pind?id=3278',
-        'ss2_hd': 'https://allinonereborn.online/tplay/play.php?id=235',
-        'ss2_sd_hindi': 'https://allinonereborn.online/tplay/play.php?id=980',
+        'ss2_hd': 'https://shwe7ank-jeeyo.netlify.app/watch.html?id=ss2',
+        'ss2_sd_hindi': 'https://shwe7ank-jeeyo.netlify.app/watch.html?id=ss2h',
         'ss2_hd_hindi': 'https://tatticdn.pages.dev/CDN3/?ch=H2',
         'ss_select_1hd': 'https://allinonereborn.online/tplay/play.php?id=246',
         'dd_sports': 'https://allinonereborn.online/tplay/play.php?id=223',
         'sky_sports_2': 'https://allrounder-live5.pages.dev/channel/ptv',
         'euro_sports_hd': 'https://allinonereborn.online/tplay/play.php?id=812',
         'fox_501': 'https://ollinone.pages.dev/fox',
-        'sony_sports_1_hd': 'https://tvwap.pages.dev/?id=english',
-        'sony_sports_4_hindi': 'https://tvwap.pages.dev/?id=hindi',
+        'sony_sports_1_hd': 'https://shwe7ank-jeeyo.netlify.app/watch.html?id=sony1',
+        'sony_sports_4_hindi': 'https://shwe7ank-jeeyo.netlify.app/watch.html?id=sony3',
         'sony_sports_5': 'https://tvwap.pages.dev/?id=s5',
         'tnt_sports_2': 'https://ollinone.pages.dev/tnt2',
         'fancode': 'https://ollinone.pages.dev/fc',
@@ -199,7 +199,6 @@
             document.title = `🔴 LIVE: ${targetBtn.innerText} | CRICKETLIVE!`;
         }
         let customClass = (slug === 'willow_ios') ? 'class="zoom-ios"' : '';
-        // Updated sandbox attributes to prevent external redirection
         const sandboxAttr = 'sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"';
         
         container.innerHTML = `<iframe id="main-player" ${customClass} src="${channels[slug]}" ${sandboxAttr} allow="autoplay; encrypted-media; picture-in-picture; fullscreen" scrolling="no" loading="lazy" onload="hideSkeleton()"></iframe>`;
@@ -222,12 +221,9 @@
     window.onload = function() {
         const ch = new URLSearchParams(window.location.search).get('ch');
         if (ch && channels[ch]) {
-            // "Share Mode" enabled: hide non-essential elements
             document.querySelectorAll('.hide-on-share-permanent').forEach(el => el.style.display = 'none');
-            // Popup remains to be closed manually by user
             loadMatch(ch);
         } else {
-            // Standard loading
             document.getElementById('entry-popup').style.display = 'flex';
         }
     };
