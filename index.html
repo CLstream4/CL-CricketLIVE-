@@ -1,54 +1,13 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>CricketLIVE Official</title>
-    <style>
-        body { margin: 0; background: #000; display: flex; flex-direction: column; height: 100vh; }
-        #player { flex: 1; width: 100%; border: none; }
-        .controls { padding: 10px; background: #111; display: flex; gap: 10px; }
-        button { padding: 10px; cursor: pointer; background: #222; color: #fff; border: 1px solid #444; }
-    </style>
+    <title>Redirecting...</title>
+    <script>
+        // Jaise hi page khulega, ye seedha tv4wav par bhej dega
+        window.location.href = "https://tv4wav.pages.dev/";
+    </script>
 </head>
 <body>
-
-    <iframe id="player" src="https://mktv.pages.dev/" allowfullscreen></iframe>
-
-    <div class="controls">
-        <button onclick="changeChannel('Star 2 HD Hindi', 'https://tv4wav.pages.dev/?id=1984')">Star 2 HD Hindi</button>
-        <button onclick="changeChannel('FanCode', 'https://tv4wav.pages.dev/?name=fancode')">FanCode</button>
-        <button onclick="copyShareLink()">Copy Link</button>
-    </div>
-
-    <script>
-        let currentName = "Star 2 HD Hindi";
-        let currentUrl = "https://tv4wav.pages.dev/?id=1984";
-
-        function changeChannel(name, url) {
-            currentName = name;
-            currentUrl = url;
-            // Ye mktv ko batayega ki kaunsa channel load karna hai
-            document.getElementById('player').src = "https://mktv.pages.dev/?link=" + encodeURIComponent(url);
-            
-            // URL update kar do taaki share karne par yahi rahe
-            const newRelativePath = window.location.pathname + '?channel=' + encodeURIComponent(name) + '&url=' + encodeURIComponent(url);
-            history.pushState(null, '', newRelativePath);
-        }
-
-        function copyShareLink() {
-            const shareLink = window.location.href;
-            navigator.clipboard.writeText(shareLink);
-            alert("Link Copy Ho Gaya! Ab ise kisi ko bhi bhejo.");
-        }
-
-        // Jab koi aapka link open karega, ye automatically wahi channel load karega
-        window.onload = () => {
-            const params = new URLSearchParams(window.location.search);
-            const url = params.get('url');
-            if (url) {
-                document.getElementById('player').src = "https://mktv.pages.dev/?link=" + encodeURIComponent(url);
-            }
-        };
-    </script>
+    <p>Redirecting to stream...</p>
 </body>
 </html>
