@@ -1,13 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Redirecting...</title>
-    <script>
-        // Jaise hi page khulega, ye seedha tv4wav par bhej dega
-        window.location.href = "https://tv4wav.pages.dev/";
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Cricket Stream</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        iframe { width: 100%; height: 90vh; border: none; }
+        .controls { height: 10vh; background: #111; display: flex; align-items: center; justify-content: center; }
+        button { padding: 12px 25px; background: #25d366; color: #fff; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+    </style>
 </head>
 <body>
-    <p>Redirecting to stream...</p>
+
+    <iframe id="streamFrame" src="https://tv4wav.pages.dev/" allowfullscreen></iframe>
+
+    <div class="controls">
+        <button onclick="shareMyLink()">Share This Channel</button>
+    </div>
+
+    <script>
+        function shareMyLink() {
+            // Iframe ka current URL pakad lo
+            const iframe = document.getElementById('streamFrame');
+            const currentStreamUrl = iframe.contentWindow.location.href;
+            
+            // Isko apne domain ke saath jodo (Base64 mein encode karke taaki link safe rahe)
+            const encodedUrl = btoa(currentStreamUrl); 
+            const myShareLink = window.location.origin + "/?v=" + encodedUrl;
+            
+            // Copy aur Share
+            navigator.clipboard.writeText(myShareLink);
+            alert("Aapka link copy ho gaya hai: " + myShareLink);
+        }
+
+        // Jab koi aapka link open karega, ye automatically wahi video load karega
+        window.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            const v = params.get('v');
+            if (v) {
+                const originalUrl = atob(v);
+                document.getElementById('streamFrame').src = originalUrl;
+            }
+        };
+    </script>
 </body>
 </html>
