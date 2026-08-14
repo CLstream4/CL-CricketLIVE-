@@ -1,48 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>CricketLIVE Official</title>
+    <title>MKTV PREMIUM</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
-        iframe { width: 100%; height: 92vh; border: none; }
-        .share-bar { height: 8vh; background: #111; display: flex; align-items: center; justify-content: center; }
-        button { padding: 10px 20px; background: #e11d48; color: #fff; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        body { margin: 0; background: #000; color: #fff; font-family: sans-serif; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 10px; }
+        .card { background: #1a1a1a; padding: 15px; border-radius: 5px; text-align: center; cursor: pointer; border: 1px solid #333; }
+        #player { display: none; width: 100%; height: 90vh; border: none; }
     </style>
 </head>
 <body>
 
-    <!-- Poori site load ho rahi hai -->
-    <iframe id="mainFrame" src="https://tv4wav.pages.dev/" allowfullscreen></iframe>
-
-    <div class="share-bar">
-        <button onclick="shareCurrent()">COPY MY DOMAIN LINK</button>
+<div id="home">
+    <div class="grid" id="list">
+        <!-- Yahan tere saare channels -->
+        <div class="card" onclick="play('https://tv4wav.pages.dev/?id=1984')">Star Sports 2</div>
+        <div class="card" onclick="play('https://tv4wav.pages.dev/?name=fancode')">FanCode</div>
     </div>
+</div>
 
-    <script>
-        // Yahan wo link daalo jo aap iframe mein dekh rahe ho
-        // User ko bolna padega ki share karne se pehle "Select" button dabaye
-        let currentLink = "https://tv4wav.pages.dev/";
+<iframe id="player" src=""></iframe>
+<button id="back" onclick="location.reload()" style="display:none; width:100%; padding:15px; background:red;">BACK</button>
 
-        function shareCurrent() {
-            // User ko prompt karo ki wo link dale
-            let link = prompt("Iframe ke upar jo URL hai, wo yahan paste karo:", currentLink);
-            if (link) {
-                // Link ko aapke domain ke saath attach kar rahe hain
-                let myDomainLink = window.location.origin + "/?go=" + btoa(link);
-                navigator.clipboard.writeText(myDomainLink);
-                alert("Link Copy Ho Gaya: " + myDomainLink);
-            }
-        }
+<script>
+    function play(url) {
+        document.getElementById('home').style.display = 'none';
+        let p = document.getElementById('player');
+        p.src = url;
+        p.style.display = 'block';
+        document.getElementById('back').style.display = 'block';
+        // URL change kar taaki share karne par yahi channel aaye
+        history.pushState(null, '', '?live=' + btoa(url));
+    }
 
-        // Agar koi aapka link open karega toh ye automatically wahan bhej dega
-        window.onload = () => {
-            const params = new URLSearchParams(window.location.search);
-            const go = params.get('go');
-            if (go) {
-                document.getElementById('mainFrame').src = atob(go);
-            }
-        };
-    </script>
+    window.onload = () => {
+        let params = new URLSearchParams(window.location.search);
+        let live = params.get('live');
+        if(live) play(atob(live));
+    }
+</script>
 </body>
 </html>
