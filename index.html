@@ -175,18 +175,23 @@
 
         let activeId = 'ss1_hd';
         const videoContainer = document.getElementById('videoContainer');
+        const player = document.getElementById('player');
 
+        // Logic for handling the page load with URL parameters
         window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('popup').classList.add('show');
             const params = new URLSearchParams(window.location.search);
-            if(params.has('share')) {
-                const targetId = params.get('share');
-                if(channelMap[targetId]) {
-                    document.body.classList.add('share-mode');
-                    activeId = targetId;
-                    applyWillowFix(activeId);
-                    document.getElementById('player').src = channelMap[targetId];
-                }
+            const targetId = params.get('share');
+            
+            if(targetId && channelMap[targetId]) {
+                activeId = targetId;
+                document.body.classList.add('share-mode');
+                applyWillowFix(targetId);
+                player.src = channelMap[targetId];
+                // Hide popup in share mode
+                document.getElementById('popup').classList.remove('show');
+            } else {
+                // Show popup only if not in share mode
+                document.getElementById('popup').classList.add('show');
             }
         });
 
@@ -204,12 +209,12 @@
             activeId = id;
             applyWillowFix(id);
             
-            // Updates browser URL dynamically so the share link matches the active channel instantly
+            // Update URL dynamically
             window.history.replaceState({}, '', '?share=' + id);
 
-            const player = document.getElementById('player');
             player.src = '';
             setTimeout(() => { player.src = url; }, 50);
+            
             document.querySelectorAll('.channel-btn').forEach(b => b.classList.remove('active'));
             if(btn) btn.classList.add('active');
         }
@@ -225,6 +230,7 @@
             window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText), "_blank");
         }
 
+        // Rest of the orientation lock logic remains unchanged
         const lockOrientation = () => {
             if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement) {
                 if (screen.orientation && screen.orientation.lock) {
