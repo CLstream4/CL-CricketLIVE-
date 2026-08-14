@@ -1,108 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CricketLIVE! Official</title>
-    <!-- CSS Wahi Purana Rakha Hai taaki design same rahe -->
+    <title>CricketLIVE Official</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-        body { background-color: #080c14; color: #fff; height: 100vh; display: flex; flex-direction: column; }
-        .player-section { width: 100%; max-width: 950px; margin: 0 auto; padding: 12px; }
-        .video-container { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #1e293b; }
-        iframe { width: 100%; height: 100%; border: none; }
-        .controls { width: 100%; max-width: 950px; margin: 0 auto; padding: 10px; }
-        .btn-copy { width: 100%; padding: 15px; background: #0284c7; border: none; color: white; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .channel-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
-        .channel-btn { padding: 12px; background: #1e293b; color: white; border: none; border-radius: 6px; cursor: pointer; }
-        .channel-btn.active { background: #0284c7; }
-        
-        /* Share Mode: Sirf Player aur WA button dikhega */
-        body.share-mode .channel-list, body.share-mode .controls { display: none; }
-        body.share-mode .wa-share-only { display: block; padding: 20px; text-align: center; }
-        .wa-share-only { display: none; }
+        body { margin: 0; background: #000; display: flex; flex-direction: column; height: 100vh; }
+        #player { flex: 1; width: 100%; border: none; }
+        .controls { padding: 10px; background: #111; display: flex; gap: 10px; }
+        button { padding: 10px; cursor: pointer; background: #222; color: #fff; border: 1px solid #444; }
     </style>
 </head>
 <body>
 
-    <div class="player-section">
-        <div class="video-container">
-            <iframe id="player" src="" allowfullscreen="true"></iframe>
-        </div>
-    </div>
+    <iframe id="player" src="https://mktv.pages.dev/" allowfullscreen></iframe>
 
     <div class="controls">
-        <button class="btn-copy" onclick="copyLink()">Copy Current Channel Link</button>
-    </div>
-
-    <div class="wa-share-only">
-        <button class="btn-copy" onclick="shareToWhatsAppDirect()">Open in App / Share</button>
-    </div>
-
-    <div class="channel-list" id="channelList">
-        <!-- Buttons yahan dynamically aayenge -->
+        <button onclick="changeChannel('Star 2 HD Hindi', 'https://tv4wav.pages.dev/?id=1984')">Star 2 HD Hindi</button>
+        <button onclick="changeChannel('FanCode', 'https://tv4wav.pages.dev/?name=fancode')">FanCode</button>
+        <button onclick="copyShareLink()">Copy Link</button>
     </div>
 
     <script>
-        // Yahan sirf wahi channel rakhe hain jo aapne kahe
-        const channelMap = {
-            'star2_hd_h': { name: 'Star 2 HD Hindi', url: 'https://tv4wav.pages.dev/?id=1984' },
-            'fancode': { name: 'FanCode', url: 'https://tv4wav.pages.dev/?name=fancode' }
-        };
+        let currentName = "Star 2 HD Hindi";
+        let currentUrl = "https://tv4wav.pages.dev/?id=1984";
 
-        const player = document.getElementById('player');
-        const channelList = document.getElementById('channelList');
+        function changeChannel(name, url) {
+            currentName = name;
+            currentUrl = url;
+            // Ye mktv ko batayega ki kaunsa channel load karna hai
+            document.getElementById('player').src = "https://mktv.pages.dev/?link=" + encodeURIComponent(url);
+            
+            // URL update kar do taaki share karne par yahi rahe
+            const newRelativePath = window.location.pathname + '?channel=' + encodeURIComponent(name) + '&url=' + encodeURIComponent(url);
+            history.pushState(null, '', newRelativePath);
+        }
 
-        // Page Load hone par
+        function copyShareLink() {
+            const shareLink = window.location.href;
+            navigator.clipboard.writeText(shareLink);
+            alert("Link Copy Ho Gaya! Ab ise kisi ko bhi bhejo.");
+        }
+
+        // Jab koi aapka link open karega, ye automatically wahi channel load karega
         window.onload = () => {
             const params = new URLSearchParams(window.location.search);
-            const shareId = params.get('share');
-
-            if (shareId && channelMap[shareId]) {
-                // Agar link mein share ID hai, toh wahi play karo
-                document.body.classList.add('share-mode');
-                player.src = channelMap[shareId].url;
-            } else {
-                // Default channel load karo
-                loadCh('star2_hd_h');
+            const url = params.get('url');
+            if (url) {
+                document.getElementById('player').src = "https://mktv.pages.dev/?link=" + encodeURIComponent(url);
             }
-
-            // Buttons create karo
-            Object.keys(channelMap).forEach(id => {
-                const btn = document.createElement('button');
-                btn.className = 'channel-btn';
-                btn.innerText = channelMap[id].name;
-                btn.onclick = () => loadCh(id);
-                channelList.appendChild(btn);
-            });
         };
-
-        function loadCh(id) {
-            player.src = channelMap[id].url;
-            // Active class set karo
-            document.querySelectorAll('.channel-btn').forEach(b => b.classList.remove('active'));
-            // Logic to select button...
-        }
-
-        function copyLink() {
-            // Yahan hum current URL generate karte hain
-            const currentUrl = window.location.origin + window.location.pathname + '?share=' + getActiveId();
-            navigator.clipboard.writeText(currentUrl);
-            alert("Link copy ho gaya: " + currentUrl);
-        }
-
-        function getActiveId() {
-            // Logic to find current playing ID (simple approach)
-            for(let id in channelMap) {
-                if(player.src.includes(channelMap[id].url.split('?')[1])) return id;
-            }
-            return 'star2_hd_h';
-        }
-
-        function shareToWhatsAppDirect() {
-            const url = window.location.origin + window.location.pathname + '?share=' + getActiveId();
-            window.open("https://api.whatsapp.com/send?text=Watch: " + url, "_blank");
-        }
     </script>
 </body>
 </html>
