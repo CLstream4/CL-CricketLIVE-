@@ -1,45 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Cricket LIVE</title>
-    <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-        iframe { width: 100%; height: 100%; border: none; }
-    </style>
 </head>
 <body>
-
-    <iframe id="mainFrame" src="https://tv4wav.pages.dev/" allowfullscreen></iframe>
-
-    <!-- Floating Share Button -->
-    <button id="shareBtn" style="position:fixed; bottom:20px; right:20px; padding:15px; background:red; color:white; border-radius:50px; border:none; z-index:9999;">Share Channel</button>
-
     <script>
-        const frame = document.getElementById('mainFrame');
+        // 1. Link check karo
+        const params = new URLSearchParams(window.location.search);
+        const targetUrl = params.get('url');
 
-        // Jab user link share kare, toh iframe ke URL ko decode karne ka trick
-        document.getElementById('shareBtn').onclick = () => {
-            // Hum iframe ke current URL ko try karenge read karne ka, 
-            // agar security block kare toh hum manual selection list use karenge.
-            try {
-                const currentUrl = frame.contentWindow.location.href;
-                const myLink = window.location.origin + "/?url=" + encodeURIComponent(currentUrl);
-                navigator.clipboard.writeText(myLink);
-                alert("Link Copy Ho Gaya: " + myLink);
-            } catch(e) {
-                alert("Security restriction! Please click on the channel first.");
-            }
-        };
+        if (targetUrl) {
+            // Agar link mein URL hai, toh seedha wahan bhej do
+            window.location.href = targetUrl;
+        } else {
+            // Agar link khali hai, toh original site kholo
+            window.location.href = "https://tv4wav.pages.dev/";
+        }
 
-        // Page load hote hi check karein agar koi channel link mein hai
-        window.onload = () => {
-            const params = new URLSearchParams(window.location.search);
-            const savedUrl = params.get('url');
-            if (savedUrl) {
-                frame.src = decodeURIComponent(savedUrl);
-            }
-        };
+        // 2. Share ka button (Isse aap manual link banaoge)
+        function generateShareLink() {
+            const currentUrl = window.location.href; // Yahan user ko kahin se copy karwana hoga
+            // Iska best solution ye hai ki user ko bolo URL bar se copy kare.
+        }
     </script>
 </body>
 </html>
