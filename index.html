@@ -2,45 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Cricket Stream</title>
+    <title>Cricket LIVE</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
-        iframe { width: 100%; height: 90vh; border: none; }
-        .controls { height: 10vh; background: #111; display: flex; align-items: center; justify-content: center; }
-        button { padding: 12px 25px; background: #25d366; color: #fff; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
 
-    <iframe id="streamFrame" src="https://tv4wav.pages.dev/" allowfullscreen></iframe>
+    <iframe id="mainFrame" src="https://tv4wav.pages.dev/" allowfullscreen></iframe>
 
-    <div class="controls">
-        <button onclick="shareMyLink()">Share This Channel</button>
-    </div>
+    <!-- Floating Share Button -->
+    <button id="shareBtn" style="position:fixed; bottom:20px; right:20px; padding:15px; background:red; color:white; border-radius:50px; border:none; z-index:9999;">Share Channel</button>
 
     <script>
-        function shareMyLink() {
-            // Iframe ka current URL pakad lo
-            const iframe = document.getElementById('streamFrame');
-            const currentStreamUrl = iframe.contentWindow.location.href;
-            
-            // Isko apne domain ke saath jodo (Base64 mein encode karke taaki link safe rahe)
-            const encodedUrl = btoa(currentStreamUrl); 
-            const myShareLink = window.location.origin + "/?v=" + encodedUrl;
-            
-            // Copy aur Share
-            navigator.clipboard.writeText(myShareLink);
-            alert("Aapka link copy ho gaya hai: " + myShareLink);
-        }
+        const frame = document.getElementById('mainFrame');
 
-        // Jab koi aapka link open karega, ye automatically wahi video load karega
+        // Jab user link share kare, toh iframe ke URL ko decode karne ka trick
+        document.getElementById('shareBtn').onclick = () => {
+            // Hum iframe ke current URL ko try karenge read karne ka, 
+            // agar security block kare toh hum manual selection list use karenge.
+            try {
+                const currentUrl = frame.contentWindow.location.href;
+                const myLink = window.location.origin + "/?url=" + encodeURIComponent(currentUrl);
+                navigator.clipboard.writeText(myLink);
+                alert("Link Copy Ho Gaya: " + myLink);
+            } catch(e) {
+                alert("Security restriction! Please click on the channel first.");
+            }
+        };
+
+        // Page load hote hi check karein agar koi channel link mein hai
         window.onload = () => {
             const params = new URLSearchParams(window.location.search);
-            const v = params.get('v');
-            if (v) {
-                const originalUrl = atob(v);
-                document.getElementById('streamFrame').src = originalUrl;
+            const savedUrl = params.get('url');
+            if (savedUrl) {
+                frame.src = decodeURIComponent(savedUrl);
             }
         };
     </script>
