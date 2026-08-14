@@ -177,20 +177,25 @@
         const videoContainer = document.getElementById('videoContainer');
         const player = document.getElementById('player');
 
-        // Logic for handling the page load with URL parameters
         window.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const targetId = params.get('share');
             
-            if(targetId && channelMap[targetId]) {
+            if (targetId && channelMap[targetId]) {
                 activeId = targetId;
                 document.body.classList.add('share-mode');
                 applyWillowFix(targetId);
                 player.src = channelMap[targetId];
-                // Hide popup in share mode
                 document.getElementById('popup').classList.remove('show');
+                
+                // Active button highlight logic for share mode
+                document.querySelectorAll('.channel-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if(btn.getAttribute('onclick').includes(targetId)) {
+                        btn.classList.add('active');
+                    }
+                });
             } else {
-                // Show popup only if not in share mode
                 document.getElementById('popup').classList.add('show');
             }
         });
@@ -209,7 +214,6 @@
             activeId = id;
             applyWillowFix(id);
             
-            // Update URL dynamically
             window.history.replaceState({}, '', '?share=' + id);
 
             player.src = '';
@@ -230,7 +234,6 @@
             window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(shareText), "_blank");
         }
 
-        // Rest of the orientation lock logic remains unchanged
         const lockOrientation = () => {
             if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullscreenElement) {
                 if (screen.orientation && screen.orientation.lock) {
