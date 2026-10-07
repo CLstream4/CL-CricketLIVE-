@@ -76,7 +76,7 @@
     <div class="main-container">
         <div class="player-section">
             <div id="videoContainer" class="video-container">
-                <iframe id="player" src="https://sonucdn-v2.pages.dev/star?id=E1HD" allow="autoplay; encrypted-media; fullscreen" sandbox="allow-scripts allow-same-origin allow-forms" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                <iframe id="player" src="" allow="autoplay; encrypted-media; fullscreen" sandbox="allow-scripts allow-same-origin allow-forms" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
             </div>
         </div>
 
@@ -175,19 +175,24 @@
     </div>
 
     <script>
-        // --- ADVANCED SECURITY LOCK (START) ---
+        // --- STRICT SECURITY & ADMIN LOCK ---
         (function() {
             const allowedDomain = "mktv.pages.dev"; 
             const currentHost = window.location.hostname;
+            const urlParams = new URLSearchParams(window.location.search);
+            const shareParam = urlParams.get('share');
+            const adminParam = urlParams.get('admin');
 
-            // 1. Domain Check: Agar koi doosri site par chalaye
-            // 2. Parameter/Iframe Check: Agar koi channel link ya query parameter se chori karne ki koshish kare
-            if (currentHost !== allowedDomain && currentHost !== "localhost" && currentHost !== "127.0.0.1") {
-                document.documentElement.innerHTML = "<body style='background:#080c14; color:#fff; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;'><h1 style='font-family:Poppins,sans-serif; font-size:2rem; text-align:center;'>Ab To Copy Mat Kar Chutiye</h1></body>";
+            // Yahan aapka password set kar diya gaya hai
+            const secretAdminPassword = "HamariAdhuriKahani";
+
+            const isAuthorized = shareParam || (adminParam === secretAdminPassword);
+
+            if ((currentHost !== "localhost" && currentHost !== "127.0.0.1" && currentHost !== allowedDomain) || !isAuthorized) {
+                document.documentElement.innerHTML = "<body style='background:#080c14; color:#fff; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;'><h1 style='font-family:Poppins,sans-serif; font-size:2rem; text-align:center;'>Access Denied: Direct site opening is not allowed!</h1></body>";
                 throw new Error("Unauthorized Access Blocked");
             }
 
-            // Right click aur inspect shortcuts block karne ke liye
             document.addEventListener('contextmenu', e => e.preventDefault());
             document.onkeydown = function(e) {
                 if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85) || (e.ctrlKey && e.keyCode == 83)) {
@@ -195,7 +200,7 @@
                 }
             }
         })();
-        // --- ADVANCED SECURITY LOCK (END) ---
+        // --- SECURITY LOCK END ---
 
         const channelMap = {
             'ss1_hd': 'https://sonucdn-v2.pages.dev/star?id=E1HD',
