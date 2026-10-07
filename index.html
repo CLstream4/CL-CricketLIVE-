@@ -175,6 +175,28 @@
     </div>
 
     <script>
+        // --- ADVANCED SECURITY LOCK (START) ---
+        (function() {
+            const allowedDomain = "mktv.pages.dev"; 
+            const currentHost = window.location.hostname;
+
+            // 1. Domain Check: Agar koi doosri site par chalaye
+            // 2. Parameter/Iframe Check: Agar koi channel link ya query parameter se chori karne ki koshish kare
+            if (currentHost !== allowedDomain && currentHost !== "localhost" && currentHost !== "127.0.0.1") {
+                document.documentElement.innerHTML = "<body style='background:#080c14; color:#fff; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;'><h1 style='font-family:Poppins,sans-serif; font-size:2rem; text-align:center;'>Ab To Copy Mat Kar Chutiye</h1></body>";
+                throw new Error("Unauthorized Access Blocked");
+            }
+
+            // Right click aur inspect shortcuts block karne ke liye
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            document.onkeydown = function(e) {
+                if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85) || (e.ctrlKey && e.keyCode == 83)) {
+                    return false;
+                }
+            }
+        })();
+        // --- ADVANCED SECURITY LOCK (END) ---
+
         const channelMap = {
             'ss1_hd': 'https://sonucdn-v2.pages.dev/star?id=E1HD',
             'ss1_hd_h': 'https://sonucdn-v2.pages.dev/star?id=H1HD',
