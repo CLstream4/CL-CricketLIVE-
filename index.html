@@ -103,6 +103,13 @@
         </div>
 
         <div class="channel-list">
+            <!-- New Added Channels -->
+            <button class="channel-btn" onclick="loadCh('https://insider365.pages.dev/iOs', 'a_sports', this)">A Sports</button>
+            <button class="channel-btn" onclick="loadCh('https://tv4wav2.pages.dev/?link=12', 'fox_sports', this)">Fox Sports</button>
+            <button class="channel-btn" onclick="loadCh('https://allinone-sports3.pages.dev/player?url=https%3A%2F%2Flive.msnetworks.net%2Fa-sports%2Fmaster.m3u8&name=WILLOW+ALT&title=ABU+DHABI+T10+LEAGUE+Vs+ABU+DHABI+T10+LEAGUE&category=Cricket&type=hls', 'kayo_sports', this)">Kayo Sports</button>
+            <button class="channel-btn" onclick="loadCh('https://willow-cricket-by-cinearena.pages.dev/?id=B0HR6MYBFS', 'starz_play', this)">Starz Play</button>
+
+            <!-- Existing Channels -->
             <button class="channel-btn active" onclick="loadCh('https://sonucdn-v5.pages.dev/star?id=E1HD', 'ss1_hd', this)">SS 1 HD</button>
             <button class="channel-btn" onclick="loadCh('https://sonucdn-v5.pages.dev/star?id=H1SD', 'ss1_sd_h', this)">SS 1 SD Hindi</button>
             <button class="channel-btn" onclick="loadCh('https://sonucdn-v5.pages.dev/star?id=H1HD', 'ss1_hd_h', this)">SS 1 HD Hindi</button>
@@ -175,6 +182,13 @@
 
     <script>
         const channelMap = {
+            /* Added New Channels Mapping */
+            'a_sports': 'https://insider365.pages.dev/iOs',
+            'fox_sports': 'https://tv4wav2.pages.dev/?link=12',
+            'kayo_sports': 'https://allinone-sports3.pages.dev/player?url=https%3A%2F%2Flive.msnetworks.net%2Fa-sports%2Fmaster.m3u8&name=WILLOW+ALT&title=ABU+DHABI+T10+LEAGUE+Vs+ABU+DHABI+T10+LEAGUE&category=Cricket&type=hls',
+            'starz_play': 'https://willow-cricket-by-cinearena.pages.dev/?id=B0HR6MYBFS',
+
+            /* Existing Channels Mapping */
             'ss1_hd': 'https://sonucdn-v5.pages.dev/star?id=E1HD',
             'ss1_sd_h': 'https://sonucdn-v5.pages.dev/star?id=H1SD',
             'ss1_hd_h': 'https://sonucdn-v5.pages.dev/star?id=H1HD',
